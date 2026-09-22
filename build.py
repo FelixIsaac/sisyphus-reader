@@ -28,6 +28,24 @@ SECTION_ORDER = [
     ("c12_kafka_appendix", "Appendix", "Hope and the Absurd in Franz Kafka")
 ]
 
+# Canonical Print Pagination (Vintage International Standard Edition)
+CHAPTER_PAGE_STARTS = {
+    "c0_preface": 1,
+    "c1_absurdity_and_suicide": 3,
+    "c2_absurd_walls": 10,
+    "c3_philosophical_suicide": 28,
+    "c4_absurd_freedom": 51,
+    "c5_don_juanism": 65,
+    "c6_drama": 77,
+    "c7_conquest": 85,
+    "c8_philosophy_and_fiction": 93,
+    "c9_kirilov": 102,
+    "c10_ephemeral_creation": 113,
+    "c11_myth_of_sisyphus": 119,
+    "c12_kafka_appendix": 124
+}
+TOTAL_BOOK_PAGES = 138
+
 def load_all_sections():
     sections = []
     for slug, default_part, default_title in SECTION_ORDER:
@@ -48,7 +66,8 @@ def build_web_app(sections):
     for sec in sections:
         sec_id = sec.get("section_id", "")
         title = sec.get("title", "")
-        toc_html += f'<li><a href="#{sec_id}" onclick="toggleTOC(false)">{title}</a></li>\n'
+        start_p = CHAPTER_PAGE_STARTS.get(sec_id, 1)
+        toc_html += f'<li><a href="#{sec_id}" onclick="toggleTOC(false)">{title} <span style="font-family:monospace; font-size:0.75rem; color:var(--text-muted); float:right;">p. {start_p}</span></a></li>\n'
     
     # Calculate book-wide stats
     total_book_blocks = sum(len(s.get("pairs", [])) for s in sections)
@@ -57,7 +76,8 @@ def build_web_app(sections):
     # Generate Sections HTML
     sections_html = ""
     global_idx = 0
-    for sec in sections:
+    sec_keys = [s.get("section_id", "") for s in sections]
+    for s_i, sec in enumerate(sections):
         sec_id = sec.get("section_id", "")
         part = sec.get("part", "")
         title = sec.get("title", "")
@@ -65,12 +85,19 @@ def build_web_app(sections):
         total_sec_paras = len(pairs)
         sec_words = sum(len(" ".join(p.get("mod_sentences", [])).split()) for p in pairs)
         est_sec_mins = max(1, round(sec_words / 240))
+
+        start_p = CHAPTER_PAGE_STARTS.get(sec_id, 1)
+        next_p = CHAPTER_PAGE_STARTS.get(sec_keys[s_i + 1], 138) if s_i + 1 < len(sec_keys) else 138
+        pages_span = max(1, next_p - start_p)
+        end_p = max(start_p, next_p - 1 if pages_span > 1 else start_p)
+        page_range_str = f"pp. {start_p}–{end_p}" if end_p > start_p else f"p. {start_p}"
         
         sections_html += f"""
-        <section class="book-section" id="{sec_id}" data-sec-id="{sec_id}" data-sec-title="{html.escape(title)}" data-sec-paras="{total_sec_paras}">
+        <section class="book-section" id="{sec_id}" data-sec-id="{sec_id}" data-sec-title="{html.escape(title)}" data-sec-paras="{total_sec_paras}" data-sec-pages="{page_range_str}">
           <div class="section-badge">{part}</div>
           <h2 class="section-title">{title}</h2>
           <div class="section-meta-row">
+            <span class="sec-meta-pill">📖 <strong>{page_range_str}</strong> (Vintage)</span>
             <span class="sec-meta-pill"><strong>{total_sec_paras}</strong> Paragraphs</span>
             <span class="sec-meta-pill"><strong>{sec_words:,}</strong> Words</span>
             <span class="sec-meta-pill">Est. <strong>~{est_sec_mins} min</strong></span>
@@ -78,6 +105,7 @@ def build_web_app(sections):
           </div>
           <div class="pairs-wrapper">
         """
+        cum_sec_words = 0
         for p_idx, pair in enumerate(pairs, 1):
             global_idx += 1
             pid = pair.get("id", f"{sec_id}-p{p_idx}")
@@ -89,13 +117,18 @@ def build_web_app(sections):
             est_para_secs = max(5, round(para_words / 4))
             pct_ch = round((p_idx / total_sec_paras) * 100)
             pct_book = round((global_idx / total_book_blocks) * 100)
+
+            # Assign canonical book page based on word flow
+            para_page = start_p + int((cum_sec_words / max(1, sec_words)) * pages_span)
+            para_page = min(end_p, max(start_p, para_page))
+            cum_sec_words += para_words
             
             sections_html += f"""
-            <div class="pair-card" id="{pid}" data-pair="{pid}" data-words="{para_words}" data-sec-id="{sec_id}" data-p-idx="{p_idx}" data-p-total="{total_sec_paras}" data-global-idx="{global_idx}" data-global-total="{total_book_blocks}">
+            <div class="pair-card" id="{pid}" data-pair="{pid}" data-words="{para_words}" data-sec-id="{sec_id}" data-page="{para_page}" data-p-idx="{p_idx}" data-p-total="{total_sec_paras}" data-global-idx="{global_idx}" data-global-total="{total_book_blocks}">
               <div class="col col-orig">
                 <div class="col-header">
                   <span class="col-tag orig-tag">Original 1955 Translation</span>
-                  <span class="para-tracker-orig">§{p_idx} of {total_sec_paras}</span>
+                  <span class="para-tracker-orig">Page {para_page} • §{p_idx} of {total_sec_paras}</span>
                 </div>
                 <p class="para-text">
             """
@@ -110,7 +143,7 @@ def build_web_app(sections):
                 <div class="col-header">
                   <div class="col-header-left">
                     <span class="col-tag mod-tag">Dignified Modern Translation</span>
-                    <span class="para-pos-tag">§{p_idx} of {total_sec_paras} <span class="para-pos-pct">({pct_ch}%)</span></span>
+                    <span class="para-pos-tag"><span class="badge-page">Page {para_page}</span><span class="para-sep">•</span>§{p_idx} of {total_sec_paras} <span class="para-pos-pct">({pct_ch}%)</span></span>
                   </div>
                   <div class="col-header-right">
                     <span class="para-meta-words">{para_words}w • ~{est_para_secs}s</span>
@@ -528,10 +561,42 @@ def build_web_app(sections):
       font-weight: 600;
       color: var(--text);
       font-family: var(--font-mono);
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }}
+    .badge-page {{
+      color: var(--gold);
+      font-weight: 700;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      background: var(--gold-bg);
+      padding: 0.1rem 0.45rem;
+      border-radius: 4px;
+      border: 1px solid rgba(209, 154, 102, 0.3);
+      display: inline-block;
+      margin-right: 0.35rem;
+    }}
+    .para-sep {{
+      color: var(--text-dim);
+      margin: 0 0.25rem;
+      font-weight: 400;
+    }}
+    .tele-page-badge {{
+      color: var(--gold);
+      font-weight: 700;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      background: var(--gold-bg);
+      padding: 0.1rem 0.45rem;
+      border-radius: 4px;
+      border: 1px solid rgba(209, 154, 102, 0.35);
+      margin-right: 0.2rem;
     }}
     .para-pos-pct {{
       color: var(--gold);
       font-size: 0.72rem;
+      margin-left: 0.3rem;
     }}
     .para-meta-words {{
       font-size: 0.72rem;
@@ -1108,7 +1173,7 @@ def build_web_app(sections):
   <div class="telemetry-bar">
     <div class="tele-stats">
       <span class="tele-item" id="tele-loc-item">
-        📍 <span id="tele-loc"><strong>§1 of 8</strong></span> <span class="tele-loc-ch" id="tele-ch-title" style="color: var(--crimson); font-weight:600;">Introduction</span> <span class="tele-sub" id="tele-loc-pct">(12%)</span>
+        📍 <span class="tele-page-badge" id="tele-page-badge">Page 1</span> <span class="tele-sub" id="tele-book-p">(p. 1 of 138)</span> • <span id="tele-loc"><strong>§1 of 2</strong></span> <span class="tele-loc-ch" id="tele-ch-title" style="color: var(--crimson); font-weight:600;">Introduction</span> <span class="tele-sub" id="tele-loc-pct">(50%)</span>
       </span>
       <span class="tele-item">
         📚 Read: <strong id="tele-consumed-count">0</strong> / {total_book_blocks} <span class="tele-sub" id="tele-consumed-pct">(0%)</span>
@@ -1298,6 +1363,7 @@ def build_web_app(sections):
       document.documentElement.setAttribute('data-view', view);
       document.getElementById('view-parallel-btn').classList.toggle('active', view === 'parallel');
       document.getElementById('view-modern-btn').classList.toggle('active', view === 'modern');
+      setTimeout(updateActiveLocationOnScroll, 40);
     }}
 
     // Interactive Sentence Lighting
@@ -1479,43 +1545,83 @@ def build_web_app(sections):
       }}
     }}
 
-    // Scroll Progress Bar & Dynamic Location Observer
+    // Real-Time Scroll Spy & Dynamic Location HUD Engine
+    const TOTAL_BOOK_PAGES = 138;
     const progressBar = document.getElementById('reading-progress-bar');
-    window.addEventListener('scroll', () => {{
+    let lastActiveCard = null;
+    let scrollRafId = null;
+
+    function applyCardLocationToHUD(card) {{
+      if (!card) return;
+      const pIdx = card.getAttribute('data-p-idx') || '1';
+      const pTotal = card.getAttribute('data-p-total') || '1';
+      const pageNum = card.getAttribute('data-page') || '1';
+      const secId = card.getAttribute('data-sec-id');
+      const secEl = document.getElementById(secId);
+      const secTitle = secEl ? (secEl.getAttribute('data-sec-title') || '') : '';
+      const pctCh = Math.round((parseInt(pIdx) / parseInt(pTotal)) * 100);
+
+      currentActivePid = card.id;
+
+      const pageBadge = document.getElementById('tele-page-badge');
+      const bookPEl = document.getElementById('tele-book-p');
+      const locEl = document.getElementById('tele-loc');
+      const chEl = document.getElementById('tele-ch-title');
+      const pctEl = document.getElementById('tele-loc-pct');
+
+      if (pageBadge) pageBadge.textContent = `Page ${{pageNum}}`;
+      if (bookPEl) bookPEl.textContent = `(p. ${{pageNum}} of ${{TOTAL_BOOK_PAGES}})`;
+      if (locEl) locEl.innerHTML = `<strong>§${{pIdx}} of ${{pTotal}}</strong>`;
+      if (chEl) chEl.textContent = secTitle.replace(/^[0-9.]+\\s*/, '');
+      if (pctEl) pctEl.textContent = `(${{pctCh}}%)`;
+    }}
+
+    function updateActiveLocationOnScroll() {{
       const scrollY = window.scrollY;
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       if (maxScroll > 0 && progressBar) {{
         const pct = Math.min(100, Math.max(0, (scrollY / maxScroll) * 100));
         progressBar.style.width = pct + '%';
       }}
+
+      // Focal reading line (~140px below the sticky header)
+      const triggerY = 140;
+      const cards = document.querySelectorAll('.pair-card');
+      let currentCard = null;
+
+      for (let i = 0; i < cards.length; i++) {{
+        const rect = cards[i].getBoundingClientRect();
+        if (rect.top <= triggerY && rect.bottom > triggerY) {{
+          currentCard = cards[i];
+          break;
+        }}
+      }}
+
+      // Fallback: If above the first card or scrolled to the very end
+      if (!currentCard && cards.length > 0) {{
+        if (cards[0].getBoundingClientRect().top > triggerY) {{
+          currentCard = cards[0];
+        }} else {{
+          currentCard = cards[cards.length - 1];
+        }}
+      }}
+
+      if (currentCard && currentCard !== lastActiveCard) {{
+        lastActiveCard = currentCard;
+        applyCardLocationToHUD(currentCard);
+      }}
+    }}
+
+    window.addEventListener('scroll', () => {{
+      if (!scrollRafId) {{
+        scrollRafId = requestAnimationFrame(() => {{
+          updateActiveLocationOnScroll();
+          scrollRafId = null;
+        }});
+      }}
     }}, {{ passive: true }});
 
-    // IntersectionObserver for Real-time Paragraph Tracking
-    const observer = new IntersectionObserver((entries) => {{
-      entries.forEach(entry => {{
-        if (entry.isIntersecting) {{
-          const card = entry.target;
-          const pIdx = card.getAttribute('data-p-idx');
-          const pTotal = card.getAttribute('data-p-total');
-          const secId = card.getAttribute('data-sec-id');
-          const secEl = document.getElementById(secId);
-          const secTitle = secEl ? (secEl.getAttribute('data-sec-title') || '') : '';
-          const pctCh = Math.round((parseInt(pIdx) / parseInt(pTotal)) * 100);
-
-          currentActivePid = card.id;
-
-          const locEl = document.getElementById('tele-loc');
-          const chEl = document.getElementById('tele-ch-title');
-          const pctEl = document.getElementById('tele-loc-pct');
-
-          if (locEl) locEl.innerHTML = `<strong>§${{pIdx}} of ${{pTotal}}</strong>`;
-          if (chEl) chEl.textContent = secTitle.replace(/^[0-9.]+\\s*/, '');
-          if (pctEl) pctEl.textContent = `(${{pctCh}}%)`;
-        }}
-      }});
-    }}, {{ threshold: 0.35 }});
-
-    document.querySelectorAll('.pair-card').forEach(card => observer.observe(card));
+    window.addEventListener('resize', updateActiveLocationOnScroll, {{ passive: true }});
 
     // Chapter Breakdown in Accountability Modal
     function renderChapterBreakdown() {{
@@ -1526,6 +1632,7 @@ def build_web_app(sections):
       sections.forEach(sec => {{
         const secId = sec.id;
         const title = sec.getAttribute('data-sec-title') || secId;
+        const secPages = sec.getAttribute('data-sec-pages') || '';
         const cards = sec.querySelectorAll('.pair-card');
         const total = cards.length;
         let readCount = 0;
@@ -1535,7 +1642,7 @@ def build_web_app(sections):
         const pct = total > 0 ? Math.round((readCount / total) * 100) : 0;
         html += `
           <div class="chapter-row">
-            <span class="ch-name" title="${{title}}">${{title}}</span>
+            <span class="ch-name" title="${{title}}">${{title}} <span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--gold); margin-left:0.3rem;">(${{secPages}})</span></span>
             <span class="ch-ratio">${{readCount}} / ${{total}} (${{pct}}%)</span>
             <div class="ch-bar">
               <div class="ch-bar-fill" style="width: ${{pct}}%;"></div>
@@ -1794,6 +1901,7 @@ def build_web_app(sections):
     // Initialize state & Cloudflare Sync
     syncToken = getOrCreateSyncToken();
     syncReadCardsUI();
+    updateActiveLocationOnScroll();
     pullCloudSync(true);
   </script>
 </body>
@@ -1945,32 +2053,47 @@ aside[epub\\:type="footnote"], aside {
         pairs = sec.get("pairs", [])
         xhtml_name = f"{sec_id}.xhtml"
 
+        start_p = CHAPTER_PAGE_STARTS.get(sec_id, 1)
+        next_p = 138
+        if idx - 2 + 1 < len(sections):
+            next_sec_id = sections[idx - 2 + 1].get("section_id")
+            next_p = CHAPTER_PAGE_STARTS.get(next_sec_id, 138)
+        pages_span = max(1, next_p - start_p)
+        end_p = max(start_p, next_p - 1 if pages_span > 1 else start_p)
+        sec_words = sum(len(" ".join(p.get("mod_sentences", [])).split()) for p in pairs) or 1
+
         ch_html = f"""<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
 <head><title>{title}</title><link rel="stylesheet" type="text/css" href="style.css"/></head>
 <body>
   <div class="chapter-header">
-    <div class="chapter-sub">{part}</div>
+    <div class="chapter-sub">{part} • pp. {start_p}–{end_p}</div>
     <h2 class="chapter-title">{title}</h2>
   </div>
 """
         asides = ""
+        cum_sec_words = 0
         for p_idx, pair in enumerate(pairs, 1):
             pid = f"{sec_id}-fn{p_idx}"
             mod_text = pair.get("mod_text") or " ".join(pair.get("mod_sentences", []))
             orig_text = pair.get("orig_text") or " ".join(pair.get("orig_sentences", []))
             move = pair.get("move", "")
+            para_words = len(mod_text.split())
+
+            para_page = start_p + int((cum_sec_words / sec_words) * pages_span)
+            para_page = min(end_p, max(start_p, para_page))
+            cum_sec_words += para_words
 
             # Sanitize for XML
             mod_text = html.escape(mod_text, quote=False)
             orig_text = html.escape(orig_text, quote=False)
             move = html.escape(move, quote=False)
 
-            ch_html += f"""  <p class="body-para">{mod_text}<a epub:type="noteref" class="noteref" href="#{pid}">✦ Decode</a></p>\n"""
+            ch_html += f"""  <p class="body-para">{mod_text}<a epub:type="noteref" class="noteref" href="#{pid}">✦ p.{para_page}</a></p>\n"""
             asides += f"""
   <aside epub:type="footnote" id="{pid}">
-    <p class="fn-badge">Original 1955 Translation (O'Brien)</p>
+    <p class="fn-badge">Original 1955 Translation (Page {para_page} • §{p_idx})</p>
     <p class="fn-orig">"{orig_text}"</p>
     <p class="fn-move"><strong>The Philosophical Move:</strong> {move}</p>
   </aside>
@@ -2211,29 +2334,44 @@ h2.chapter-title {
         pairs = sec.get("pairs", [])
         xhtml_name = f"{sec_id}.xhtml"
 
+        start_p = CHAPTER_PAGE_STARTS.get(sec_id, 1)
+        next_p = 138
+        if idx - 2 + 1 < len(sections):
+            next_sec_id = sections[idx - 2 + 1].get("section_id")
+            next_p = CHAPTER_PAGE_STARTS.get(next_sec_id, 138)
+        pages_span = max(1, next_p - start_p)
+        end_p = max(start_p, next_p - 1 if pages_span > 1 else start_p)
+        sec_words = sum(len(" ".join(p.get("mod_sentences", [])).split()) for p in pairs) or 1
+
         ch_html = f"""<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>{html.escape(title)}</title><link rel="stylesheet" type="text/css" href="style.css"/></head>
 <body>
   <div class="chapter-header">
-    <div class="chapter-sub">{html.escape(part)}</div>
+    <div class="chapter-sub">{html.escape(part)} • pp. {start_p}–{end_p}</div>
     <h2 class="chapter-title">{html.escape(title)}</h2>
   </div>
 """
+        cum_sec_words = 0
         for p_idx, pair in enumerate(pairs, 1):
             orig_text = html.escape(pair.get("orig_text") or " ".join(pair.get("orig_sentences", [])), quote=False)
             mod_text = html.escape(pair.get("mod_text") or " ".join(pair.get("mod_sentences", [])), quote=False)
             move = html.escape(pair.get("move", ""), quote=False)
+            para_words = len(mod_text.split())
+
+            para_page = start_p + int((cum_sec_words / sec_words) * pages_span)
+            para_page = min(end_p, max(start_p, para_page))
+            cum_sec_words += para_words
 
             ch_html += f"""
   <div class="pair-block">
     <div class="orig-unit">
-      <span class="badge badge-orig">Original 1955 Translation (§{p_idx})</span>
+      <span class="badge badge-orig">Original 1955 Translation (Page {para_page} • §{p_idx})</span>
       <p class="text-orig">"{orig_text}"</p>
     </div>
     <div class="mod-card">
-      <span class="badge badge-mod">Dignified Modern Translation</span>
+      <span class="badge badge-mod">Dignified Modern Translation (Page {para_page})</span>
       <p class="text-mod">{mod_text}</p>
       <div class="move-box">
         <strong>The Philosophical Move:</strong> {move}
