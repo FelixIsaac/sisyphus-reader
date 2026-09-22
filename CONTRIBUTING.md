@@ -29,7 +29,7 @@ All contributions to the translation and annotations MUST adhere to the **Dignif
 3. **Rebuild & Verify:**
    Run the master build pipeline to verify that all editions compile without error:
    ```bash
-   python3 build_full_edition.py
+   python3 build.py
    ```
 4. **Submit a Pull Request:**
    - Clearly explain what changed and why.

@@ -150,7 +150,7 @@ Myth-of-Sisyphus-Modern-Translation/
 │   ├── c11_myth_of_sisyphus.json
 │   └── c12_kafka_appendix.json
 ├── source_text/                               # Raw extracted chapter text units
-├── build_full_edition.py                      # Master pipeline: compiles Web App, EPUBs & Markdown
+├── build.py                                   # Master pipeline: compiles Web App, EPUBs & Markdown
 ├── myth_of_sisyphus_modern_translation.md     # Complete compiled Markdown companion
 ├── The_Myth_of_Sisyphus_Modern_Masterwork.epub
 ├── The_Myth_of_Sisyphus_Dual_Track_Edition.epub
@@ -195,7 +195,7 @@ Every translation file in `translations/` adheres to a strict relational schema:
 ### Compiling All Formats
 To rebuild the Web App (`index.html` and `dist/index.html`), both EPUB editions, and the master Markdown companion, simply run:
 ```bash
-python3 build_full_edition.py
+python3 build.py
 ```
 
 ### Local Web Preview
