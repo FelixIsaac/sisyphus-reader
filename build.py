@@ -148,6 +148,7 @@ def build_web_app(sections):
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Camus Reader">
   <title>The Myth of Sisyphus — Complete Critical Edition</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     :root {{
       --bg: #0d0f12;
@@ -889,6 +890,178 @@ def build_web_app(sections):
       color: #fff;
       border-color: var(--crimson);
     }}
+
+    /* Cloudflare Sync Modal & Toast */
+    .modal-sync {{
+      max-width: 620px;
+    }}
+    .sync-box {{
+      background: var(--surface-orig);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1.1rem;
+    }}
+    .sync-box-header {{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }}
+    .sync-box-label {{
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+    }}
+    .sync-kv-badge {{
+      font-size: 0.68rem;
+      color: #2ecc71;
+      font-weight: 600;
+      background: rgba(46, 204, 113, 0.1);
+      border: 1px solid rgba(46, 204, 113, 0.3);
+      padding: 0.15rem 0.5rem;
+      border-radius: 12px;
+    }}
+    .sync-key-row {{
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }}
+    .sync-key-display {{
+      font-family: var(--font-mono);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gold);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+      user-select: all;
+    }}
+    .sync-qr-card {{
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      background: var(--surface-orig);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem;
+      margin-bottom: 1.1rem;
+    }}
+    #qrcode-wrap {{
+      flex-shrink: 0;
+      background: #fff;
+      padding: 8px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }}
+    #qrcode img, #qrcode canvas {{
+      display: block;
+    }}
+    .sync-qr-info h4 {{
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }}
+    .sync-qr-info p {{
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 0.6rem;
+    }}
+    .sync-direct-url {{
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--crimson);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      word-break: break-all;
+    }}
+    .sync-pair-box {{
+      background: var(--surface-orig);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1.1rem;
+    }}
+    .sync-pair-title {{
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }}
+    .sync-input-row {{
+      display: flex;
+      gap: 0.6rem;
+    }}
+    .sync-input-row input {{
+      flex-grow: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 6px;
+      outline: none;
+    }}
+    .sync-input-row input:focus {{
+      border-color: var(--crimson);
+    }}
+    .app-toast {{
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border-highlight);
+      border-left: 4px solid var(--crimson);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      padding: 0.75rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
+      max-width: 380px;
+    }}
+    .app-toast.visible {{
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }}
+    @media (max-width: 600px) {{
+      .sync-qr-card {{
+        flex-direction: column;
+        text-align: center;
+      }}
+      .sync-key-row {{
+        flex-direction: column;
+        align-items: stretch;
+      }}
+      .sync-input-row {{
+        flex-direction: column;
+      }}
+      .app-toast {{
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        max-width: none;
+      }}
+    }}
   </style>
 </head>
 <body>
@@ -920,6 +1093,7 @@ def build_web_app(sections):
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
       </button>
 
+      <button class="btn" onclick="toggleSyncModal(true)" id="sync-modal-btn" title="Cloudflare Cross-Device Sync">☁️ Sync</button>
       <button class="btn" onclick="toggleAccountabilityModal(true)" title="Reading Velocity & Accountability">📊 Stats</button>
       <button class="btn" onclick="toggleModal(true)">Concepts</button>
     </div>
@@ -949,9 +1123,13 @@ def build_web_app(sections):
       <span class="tele-item tele-pace-item">
         🎯 Pacing: <span class="pace-chip on-track" id="pace-chip">16m / ch</span>
       </span>
+      <span class="tele-item" id="tele-sync-item" onclick="toggleSyncModal(true)" style="cursor:pointer;" title="Cloudflare Cross-Device Sync">
+        ☁️ <span id="tele-sync-dot">🟢</span> <span id="tele-sync-text">Synced</span>
+      </span>
     </div>
     <div class="tele-actions">
-      <button class="btn btn-sm" onclick="toggleAccountabilityModal(true)" title="Open Reading Accountability Dashboard">📊 Accountability Stats</button>
+      <button class="btn btn-sm" onclick="toggleSyncModal(true)" title="Cloudflare Device Sync">☁️ Sync Device</button>
+      <button class="btn btn-sm" onclick="toggleAccountabilityModal(true)" title="Open Reading Accountability Dashboard">📊 Stats</button>
     </div>
   </div>
 
@@ -1036,6 +1214,66 @@ def build_web_app(sections):
       <div class="modal-footer-actions">
         <button class="btn btn-danger" onclick="resetAllReadingProgress()">Reset Progress</button>
         <button class="btn btn-primary" onclick="toggleAccountabilityModal(false)">Back to Reading</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cloudflare Cross-Device Sync Modal -->
+  <div class="modal-overlay" id="sync-modal" onclick="if(event.target===this) toggleSyncModal(false)">
+    <div class="modal-card modal-sync">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">☁️ Cloudflare Cross-Device Sync</h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
+            Read seamlessly across your Mac, iPhone, iPad, and e-reader. Zero login, zero passwords.
+          </p>
+        </div>
+        <button class="close-btn" onclick="toggleSyncModal(false)">&times;</button>
+      </div>
+
+      <!-- Sync Key Display -->
+      <div class="sync-box">
+        <div class="sync-box-header">
+          <span class="sync-box-label">YOUR DEVICE PAIRING KEY</span>
+          <span class="sync-kv-badge">Cloudflare KV Active</span>
+        </div>
+        <div class="sync-key-row">
+          <div class="sync-key-display" id="sync-token-display">sisy-••••••</div>
+          <button class="btn btn-sm" onclick="copySyncLink()" id="btn-copy-sync">📋 Copy Link</button>
+          <button class="btn btn-sm" onclick="generateNewSyncToken()" title="Generate a fresh sync token">🔄 New Key</button>
+        </div>
+      </div>
+
+      <!-- QR Code Hand-Off -->
+      <div class="sync-qr-card">
+        <div id="qrcode-wrap">
+          <div id="qrcode"></div>
+        </div>
+        <div class="sync-qr-info">
+          <h4>📱 Scan with your iPhone Camera</h4>
+          <p>
+            Point your iPhone or iPad camera at this QR code. It instantly opens the reader, pairs the devices, and restores your marked paragraphs, speed, and chapter location.
+          </p>
+          <div class="sync-direct-url">
+            <span id="sync-url-preview">https://sisyphus-reader.pages.dev/?sync=...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pair another device -->
+      <div class="sync-pair-box">
+        <div class="sync-pair-title">Have a key from another device?</div>
+        <div class="sync-input-row">
+          <input type="text" id="sync-input-token" placeholder="Paste device key (e.g. sisy-9x2m4k)..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+          <button class="btn btn-primary" onclick="pairRemoteDeviceToken()">Link & Merge</button>
+        </div>
+      </div>
+
+      <div class="modal-footer-actions">
+        <div style="font-size: 0.72rem; color: var(--text-dim);" id="sync-status-footer">
+          Last Synced: Just now • Global Edge
+        </div>
+        <button class="btn btn-primary" onclick="toggleSyncModal(false)">Done</button>
       </div>
     </div>
   </div>
@@ -1186,6 +1424,7 @@ def build_web_app(sections):
       localStorage.setItem('sisyphus-consumed-cards', JSON.stringify(readCards));
       syncReadCardsUI();
       renderChapterBreakdown();
+      scheduleCloudPush();
     }}
 
     function resetAllReadingProgress() {{
@@ -1200,6 +1439,7 @@ def build_web_app(sections):
         }});
         syncReadCardsUI();
         renderChapterBreakdown();
+        scheduleCloudPush(true);
       }}
     }}
 
@@ -1262,6 +1502,8 @@ def build_web_app(sections):
           const secTitle = secEl ? (secEl.getAttribute('data-sec-title') || '') : '';
           const pctCh = Math.round((parseInt(pIdx) / parseInt(pTotal)) * 100);
 
+          currentActivePid = card.id;
+
           const locEl = document.getElementById('tele-loc');
           const chEl = document.getElementById('tele-ch-title');
           const pctEl = document.getElementById('tele-loc-pct');
@@ -1304,8 +1546,255 @@ def build_web_app(sections):
       listEl.innerHTML = html;
     }}
 
-    // Initialize state
+    // ==========================================
+    // Cloudflare Zero-Login Cross-Device Sync
+    // ==========================================
+    let syncToken = '';
+    let isSyncing = false;
+    let pushTimeout = null;
+    let currentActivePid = '';
+
+    function getOrCreateSyncToken() {{
+      const urlParams = new URLSearchParams(window.location.search);
+      let t = urlParams.get('sync');
+      if (!t && window.location.hash.startsWith('#sync=')) {{
+        t = window.location.hash.replace('#sync=', '');
+      }}
+      if (t) {{
+        t = t.trim().toLowerCase();
+        localStorage.setItem('sisyphus-sync-token', t);
+        const cleanUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({{}}, document.title, cleanUrl);
+        return t;
+      }}
+
+      let stored = localStorage.getItem('sisyphus-sync-token');
+      if (!stored) {{
+        const rand = Math.random().toString(36).substring(2, 8);
+        stored = `sisy-${{rand}}`;
+        localStorage.setItem('sisyphus-sync-token', stored);
+      }}
+      return stored;
+    }}
+
+    function setSyncStatus(state, label) {{
+      const dotEl = document.getElementById('tele-sync-dot');
+      const textEl = document.getElementById('tele-sync-text');
+      const footerEl = document.getElementById('sync-status-footer');
+      if (dotEl) {{
+        if (state === 'syncing') dotEl.textContent = '🟡';
+        else if (state === 'synced') dotEl.textContent = '🟢';
+        else if (state === 'offline') dotEl.textContent = '⚪';
+        else dotEl.textContent = '🔴';
+      }}
+      if (textEl) textEl.textContent = label;
+      if (footerEl) {{
+        if (state === 'syncing') footerEl.textContent = 'Syncing to Cloudflare KV Edge...';
+        else if (state === 'synced') footerEl.textContent = `Last Synced: ${{new Date().toLocaleTimeString()}} • Global Edge`;
+        else if (state === 'offline') footerEl.textContent = 'Offline (changes stored locally)';
+      }}
+    }}
+
+    function showToast(msg, duration = 3200) {{
+      let toast = document.getElementById('app-toast');
+      if (!toast) {{
+        toast = document.createElement('div');
+        toast.id = 'app-toast';
+        toast.className = 'app-toast';
+        document.body.appendChild(toast);
+      }}
+      toast.textContent = msg;
+      toast.classList.add('visible');
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(() => {{
+        toast.classList.remove('visible');
+      }}, duration);
+    }}
+
+    function toggleSyncModal(open) {{
+      const m = document.getElementById('sync-modal');
+      if (!m) return;
+      if (open) {{
+        m.classList.add('open');
+        renderSyncModalContent();
+      }} else {{
+        m.classList.remove('open');
+      }}
+    }}
+
+    let qrCodeObj = null;
+    function renderSyncModalContent() {{
+      const tokenDisplay = document.getElementById('sync-token-display');
+      if (tokenDisplay) tokenDisplay.textContent = syncToken;
+
+      const directUrl = `${{window.location.origin}}${{window.location.pathname}}?sync=${{syncToken}}`;
+      const urlPreview = document.getElementById('sync-url-preview');
+      if (urlPreview) urlPreview.textContent = directUrl;
+
+      const qrTarget = document.getElementById('qrcode');
+      if (qrTarget) {{
+        qrTarget.innerHTML = '';
+        if (typeof QRCode !== 'undefined') {{
+          qrCodeObj = new QRCode(qrTarget, {{
+            text: directUrl,
+            width: 130,
+            height: 130,
+            colorDark: "#1a1a1a",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.M
+          }});
+        }} else {{
+          qrTarget.innerHTML = '<div style="font-size:0.75rem; color:#888; padding:10px;">QR ready online</div>';
+        }}
+      }}
+    }}
+
+    function copySyncLink() {{
+      const directUrl = `${{window.location.origin}}${{window.location.pathname}}?sync=${{syncToken}}`;
+      navigator.clipboard.writeText(directUrl).then(() => {{
+        const btn = document.getElementById('btn-copy-sync');
+        if (btn) {{
+          btn.textContent = '✓ Copied!';
+          setTimeout(() => btn.textContent = '📋 Copy Link', 2000);
+        }}
+        showToast('📋 Cloudflare sync link copied to clipboard!');
+      }}).catch(() => {{
+        prompt('Copy your sync link:', directUrl);
+      }});
+    }}
+
+    function generateNewSyncToken() {{
+      if (confirm('Generate a fresh sync key? This device will start a new sync room.')) {{
+        const rand = Math.random().toString(36).substring(2, 8);
+        syncToken = `sisy-${{rand}}`;
+        localStorage.setItem('sisyphus-sync-token', syncToken);
+        renderSyncModalContent();
+        scheduleCloudPush(true);
+        showToast(`✨ Generated new sync key: ${{syncToken}}`);
+      }}
+    }}
+
+    async function pairRemoteDeviceToken() {{
+      const input = document.getElementById('sync-input-token');
+      if (!input) return;
+      let raw = (input.value || '').trim().toLowerCase();
+      if (!raw) return;
+      if (raw.includes('sync=')) {{
+        const match = raw.match(/sync=([a-z0-9-]+)/);
+        if (match) raw = match[1];
+      }}
+      if (raw.length < 4) {{
+        alert('Invalid device key');
+        return;
+      }}
+
+      syncToken = raw;
+      localStorage.setItem('sisyphus-sync-token', syncToken);
+      input.value = '';
+      renderSyncModalContent();
+      showToast(`🔗 Linking device key: ${{syncToken}}...`);
+      await pullCloudSync(true);
+      toggleSyncModal(false);
+    }}
+
+    async function pullCloudSync(isInitial = false) {{
+      if (!syncToken) return;
+      setSyncStatus('syncing', 'Syncing...');
+      try {{
+        const res = await fetch(`/api/sync?token=${{encodeURIComponent(syncToken)}}`, {{
+          cache: 'no-store'
+        }});
+        if (!res.ok) throw new Error('Sync fetch failed');
+        const json = await res.json();
+        if (json.ok && json.data) {{
+          const remoteData = json.data;
+          let newCardsCount = 0;
+          if (remoteData.readCards && typeof remoteData.readCards === 'object') {{
+            for (const [cid, val] of Object.entries(remoteData.readCards)) {{
+              if (!readCards[cid]) {{
+                readCards[cid] = val;
+                newCardsCount++;
+              }}
+            }}
+          }}
+          if (remoteData.sessionSeconds && remoteData.sessionSeconds > sessionSeconds) {{
+            sessionSeconds = remoteData.sessionSeconds;
+          }}
+          localStorage.setItem('sisyphus-consumed-cards', JSON.stringify(readCards));
+          syncReadCardsUI();
+          renderChapterBreakdown();
+
+          if (isInitial && newCardsCount > 0) {{
+            showToast(`☁️ Cloudflare Sync: Restored ${{newCardsCount}} paragraphs!`);
+          }}
+          if (isInitial && remoteData.currentSecId && !window.location.hash) {{
+            const targetEl = document.getElementById(remoteData.currentSecId);
+            if (targetEl) {{
+              setTimeout(() => {{
+                targetEl.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
+              }}, 400);
+            }}
+          }}
+        }}
+        setSyncStatus('synced', 'Synced');
+      }} catch (err) {{
+        console.warn('Cloudflare pull error:', err);
+        setSyncStatus('offline', 'Offline');
+      }}
+    }}
+
+    function scheduleCloudPush(immediate = false) {{
+      if (pushTimeout) clearTimeout(pushTimeout);
+      if (immediate) {{
+        pushCloudSync();
+      }} else {{
+        setSyncStatus('syncing', 'Saving...');
+        pushTimeout = setTimeout(pushCloudSync, 1200);
+      }}
+    }}
+
+    async function pushCloudSync() {{
+      if (!syncToken || isSyncing) return;
+      isSyncing = true;
+      setSyncStatus('syncing', 'Syncing...');
+      try {{
+        const speedVal = parseInt(document.getElementById('tele-speed')?.textContent || '240');
+        const payload = {{
+          token: syncToken,
+          data: {{
+            readCards: readCards,
+            currentSecId: currentActivePid,
+            sessionSeconds: sessionSeconds,
+            avgWpm: speedVal,
+            updatedAt: Date.now()
+          }}
+        }};
+        const res = await fetch('/api/sync', {{
+          method: 'POST',
+          headers: {{ 'Content-Type': 'application/json' }},
+          body: JSON.stringify(payload)
+        }});
+        if (!res.ok) throw new Error('Sync push failed');
+        setSyncStatus('synced', 'Synced');
+      }} catch (err) {{
+        console.warn('Cloudflare push error:', err);
+        setSyncStatus('offline', 'Offline');
+      }} finally {{
+        isSyncing = false;
+      }}
+    }}
+
+    // Visibility listener for auto-sync across tabs/devices
+    document.addEventListener('visibilitychange', () => {{
+      if (document.visibilityState === 'visible') {{
+        pullCloudSync(false);
+      }}
+    }});
+
+    // Initialize state & Cloudflare Sync
+    syncToken = getOrCreateSyncToken();
     syncReadCardsUI();
+    pullCloudSync(true);
   </script>
 </body>
 </html>
