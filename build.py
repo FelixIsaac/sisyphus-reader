@@ -50,32 +50,52 @@ def build_web_app(sections):
         title = sec.get("title", "")
         toc_html += f'<li><a href="#{sec_id}" onclick="toggleTOC(false)">{title}</a></li>\n'
     
+    # Calculate book-wide stats
+    total_book_blocks = sum(len(s.get("pairs", [])) for s in sections)
+    total_book_words = sum(sum(len(" ".join(p.get("mod_sentences", [])).split()) for p in s.get("pairs", [])) for s in sections)
+    
     # Generate Sections HTML
     sections_html = ""
+    global_idx = 0
     for sec in sections:
         sec_id = sec.get("section_id", "")
         part = sec.get("part", "")
         title = sec.get("title", "")
         pairs = sec.get("pairs", [])
+        total_sec_paras = len(pairs)
+        sec_words = sum(len(" ".join(p.get("mod_sentences", [])).split()) for p in pairs)
+        est_sec_mins = max(1, round(sec_words / 240))
         
         sections_html += f"""
-        <section class="book-section" id="{sec_id}">
+        <section class="book-section" id="{sec_id}" data-sec-id="{sec_id}" data-sec-title="{html.escape(title)}" data-sec-paras="{total_sec_paras}">
           <div class="section-badge">{part}</div>
           <h2 class="section-title">{title}</h2>
+          <div class="section-meta-row">
+            <span class="sec-meta-pill"><strong>{total_sec_paras}</strong> Paragraphs</span>
+            <span class="sec-meta-pill"><strong>{sec_words:,}</strong> Words</span>
+            <span class="sec-meta-pill">Est. <strong>~{est_sec_mins} min</strong></span>
+            <span class="sec-meta-pill target-pill">🎯 Target: 15–20 min</span>
+          </div>
           <div class="pairs-wrapper">
         """
         for p_idx, pair in enumerate(pairs, 1):
+            global_idx += 1
             pid = pair.get("id", f"{sec_id}-p{p_idx}")
             orig_sents = pair.get("orig_sentences", [])
             mod_sents = pair.get("mod_sentences", [])
             move = pair.get("move", "")
             
+            para_words = len(" ".join(mod_sents).split())
+            est_para_secs = max(5, round(para_words / 4))
+            pct_ch = round((p_idx / total_sec_paras) * 100)
+            pct_book = round((global_idx / total_book_blocks) * 100)
+            
             sections_html += f"""
-            <div class="pair-card" id="{pid}" data-pair="{pid}">
+            <div class="pair-card" id="{pid}" data-pair="{pid}" data-words="{para_words}" data-sec-id="{sec_id}" data-p-idx="{p_idx}" data-p-total="{total_sec_paras}" data-global-idx="{global_idx}" data-global-total="{total_book_blocks}">
               <div class="col col-orig">
                 <div class="col-header">
                   <span class="col-tag orig-tag">Original 1955 Translation</span>
-                  <span class="para-num">§{p_idx}</span>
+                  <span class="para-tracker-orig">§{p_idx} of {total_sec_paras}</span>
                 </div>
                 <p class="para-text">
             """
@@ -88,8 +108,16 @@ def build_web_app(sections):
               </div>
               <div class="col col-mod">
                 <div class="col-header">
-                  <span class="col-tag mod-tag">Dignified Modern Translation</span>
-                  <span class="para-num">§{p_idx}</span>
+                  <div class="col-header-left">
+                    <span class="col-tag mod-tag">Dignified Modern Translation</span>
+                    <span class="para-pos-tag">§{p_idx} of {total_sec_paras} <span class="para-pos-pct">({pct_ch}%)</span></span>
+                  </div>
+                  <div class="col-header-right">
+                    <span class="para-meta-words">{para_words}w • ~{est_para_secs}s</span>
+                    <button class="btn-check" id="chk-{pid}" onclick="toggleMarkRead('{pid}', {para_words}, event)" title="Toggle consumed">
+                      <span class="check-icon">○</span> <span class="check-txt">Mark Read</span>
+                    </button>
+                  </div>
                 </div>
                 <p class="para-text">
             """
@@ -265,8 +293,28 @@ def build_web_app(sections):
       color: #fff;
     }}
 
+    /* Reading Progress Track & Bar */
+    .reading-progress-track {{
+      position: sticky;
+      top: 48px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.05);
+      z-index: 199;
+    }}
+    .reading-progress-fill {{
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--crimson), var(--gold));
+      transition: width 0.1s linear;
+    }}
+
     /* Telemetry Bar */
     .telemetry-bar {{
+      position: sticky;
+      top: 51px;
+      z-index: 198;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
       padding: 0.45rem 1.5rem;
@@ -276,14 +324,61 @@ def build_web_app(sections):
       font-family: var(--font-sans);
       font-size: 0.78rem;
       color: var(--text-muted);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }}
     .tele-stats {{
       display: flex;
-      gap: 1.4rem;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }}
+    .tele-item {{
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
     }}
     .tele-item strong {{
       color: var(--text);
       font-weight: 600;
+    }}
+    .tele-sub {{
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+    }}
+    .tele-timer-btn {{
+      background: var(--surface-hover);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 4px;
+      padding: 0.1rem 0.35rem;
+      font-size: 0.68rem;
+      cursor: pointer;
+      line-height: 1;
+      margin-left: 0.2rem;
+    }}
+    .pace-chip {{
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.12rem 0.45rem;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+    }}
+    .pace-chip.on-track {{
+      background: rgba(39, 174, 96, 0.15);
+      color: #2ecc71;
+      border: 1px solid rgba(46, 204, 113, 0.3);
+    }}
+    .pace-chip.fast {{
+      background: rgba(97, 175, 239, 0.15);
+      color: #61afef;
+      border: 1px solid rgba(97, 175, 239, 0.3);
+    }}
+    .tele-actions {{
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }}
 
     /* Main Container */
@@ -295,7 +390,7 @@ def build_web_app(sections):
 
     .book-section {{
       margin-bottom: 5rem;
-      scroll-margin-top: 5rem;
+      scroll-margin-top: 6rem;
     }}
 
     .section-badge {{
@@ -311,10 +406,39 @@ def build_web_app(sections):
       font-size: 2.2rem;
       font-weight: 700;
       color: var(--crimson);
-      margin-bottom: 2rem;
+      margin-bottom: 0.8rem;
       letter-spacing: -0.01em;
       border-bottom: 1px solid var(--border);
       padding-bottom: 0.6rem;
+    }}
+
+    /* Section Metadata Row */
+    .section-meta-row {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      font-family: var(--font-sans);
+    }}
+    .sec-meta-pill {{
+      font-size: 0.75rem;
+      padding: 0.22rem 0.6rem;
+      border-radius: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }}
+    .sec-meta-pill strong {{
+      color: var(--text);
+    }}
+    .sec-meta-pill.target-pill {{
+      background: var(--crimson-dim);
+      color: var(--crimson);
+      border-color: var(--crimson-border);
+      font-weight: 600;
     }}
 
     /* Parallel Layout */
@@ -332,10 +456,15 @@ def build_web_app(sections):
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1.8rem;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      scroll-margin-top: 7rem;
     }}
     .pair-card:hover {{
       border-color: var(--border-highlight);
+    }}
+    .pair-card.is-read {{
+      border-color: rgba(46, 204, 113, 0.4);
+      box-shadow: inset 0 0 0 1px rgba(46, 204, 113, 0.2);
     }}
 
     .col {{
@@ -356,6 +485,18 @@ def build_web_app(sections):
       align-items: center;
       margin-bottom: 1rem;
       font-family: var(--font-sans);
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }}
+    .col-header-left {{
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }}
+    .col-header-right {{
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
     }}
     .col-tag {{
       font-size: 0.7rem;
@@ -375,10 +516,53 @@ def build_web_app(sections):
       color: var(--crimson);
       border: 1px solid var(--crimson-border);
     }}
-    .para-num {{
+    .para-tracker-orig {{
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      font-weight: 500;
+    }}
+    .para-pos-tag {{
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+      font-family: var(--font-mono);
+    }}
+    .para-pos-pct {{
+      color: var(--gold);
+      font-size: 0.72rem;
+    }}
+    .para-meta-words {{
       font-size: 0.72rem;
       color: var(--text-dim);
       font-family: var(--font-mono);
+    }}
+
+    /* Mark As Read Button */
+    .btn-check {{
+      background: var(--surface-orig);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: all 0.15s ease;
+    }}
+    .btn-check:hover {{
+      background: var(--surface-hover);
+      border-color: var(--border-highlight);
+      color: var(--text);
+    }}
+    .pair-card.is-read .btn-check {{
+      background: rgba(46, 204, 113, 0.15);
+      border-color: rgba(46, 204, 113, 0.4);
+      color: #2ecc71;
     }}
 
     .para-text {{
@@ -508,12 +692,27 @@ def build_web_app(sections):
         padding: 0.25rem 0.5rem;
         font-size: 0.72rem;
       }}
+      .telemetry-bar {{
+        padding: 0.35rem 0.8rem;
+        font-size: 0.72rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+      }}
       .tele-stats {{
+        gap: 0.5rem 0.9rem;
+        width: 100%;
+        justify-content: space-between;
+      }}
+      .tele-item {{
+        font-size: 0.72rem;
+      }}
+      .tele-pace-item {{
         display: none;
       }}
     }}
 
-    /* Key Concepts Modal */
+    /* Key Concepts & Accountability Modals */
     .modal-overlay {{
       display: none;
       position: fixed;
@@ -537,10 +736,13 @@ def build_web_app(sections):
       padding: 1.8rem;
       font-family: var(--font-sans);
     }}
+    .modal-accountability {{
+      max-width: 700px;
+    }}
     .modal-header {{
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       margin-bottom: 1.2rem;
       border-bottom: 1px solid var(--border);
       padding-bottom: 0.6rem;
@@ -550,6 +752,143 @@ def build_web_app(sections):
     .concept-item {{ margin-bottom: 1.2rem; }}
     .concept-name {{ font-weight: 700; font-size: 0.95rem; color: var(--gold); }}
     .concept-desc {{ font-size: 0.88rem; color: var(--text); margin-top: 0.2rem; line-height: 1.5; }}
+
+    /* Accountability KPI Grid */
+    .acc-grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.2rem;
+    }}
+    .acc-card {{
+      background: var(--surface-orig);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem;
+      text-align: center;
+    }}
+    .acc-val {{
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--crimson);
+      font-family: var(--font-mono);
+    }}
+    .acc-label {{
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }}
+    .acc-sub {{
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      margin-top: 0.15rem;
+    }}
+
+    /* Pacing Box */
+    .pacing-box {{
+      background: var(--gold-bg);
+      border: 1px solid rgba(209, 154, 102, 0.4);
+      border-radius: 8px;
+      padding: 0.85rem 1.1rem;
+      margin-bottom: 1.3rem;
+    }}
+    .pacing-title {{
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--gold);
+      margin-bottom: 0.25rem;
+    }}
+    .pacing-desc {{
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: var(--text);
+    }}
+
+    /* Chapter Progress Rows */
+    .acc-section-title {{
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }}
+    .chapter-progress-list {{
+      max-height: 220px;
+      overflow-y: auto;
+      margin-bottom: 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface-orig);
+    }}
+    .chapter-row {{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.45rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+    }}
+    .chapter-row:last-child {{
+      border-bottom: none;
+    }}
+    .ch-name {{
+      flex-grow: 1;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 280px;
+    }}
+    .ch-ratio {{
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-left: 0.6rem;
+      white-space: nowrap;
+    }}
+    .ch-bar {{
+      width: 70px;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-left: 0.6rem;
+      flex-shrink: 0;
+    }}
+    .ch-bar-fill {{
+      height: 100%;
+      background: #2ecc71;
+      transition: width 0.3s ease;
+    }}
+
+    /* Modal Footer Actions */
+    .modal-footer-actions {{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+      border-top: 1px solid var(--border);
+      padding-top: 0.8rem;
+    }}
+    .btn-danger {{
+      background: rgba(224, 83, 71, 0.1);
+      border: 1px solid var(--crimson-border);
+      color: var(--crimson);
+    }}
+    .btn-danger:hover {{
+      background: var(--crimson);
+      color: #fff;
+    }}
+    .btn-primary {{
+      background: var(--crimson);
+      color: #fff;
+      border-color: var(--crimson);
+    }}
   </style>
 </head>
 <body>
@@ -581,19 +920,38 @@ def build_web_app(sections):
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
       </button>
 
+      <button class="btn" onclick="toggleAccountabilityModal(true)" title="Reading Velocity & Accountability">📊 Stats</button>
       <button class="btn" onclick="toggleModal(true)">Concepts</button>
     </div>
   </header>
 
-  <!-- Reading Telemetry Bar -->
+  <!-- Reading Progress Track Bar -->
+  <div class="reading-progress-track">
+    <div class="reading-progress-fill" id="reading-progress-bar"></div>
+  </div>
+
+  <!-- Reading Telemetry & Accountability Bar -->
   <div class="telemetry-bar">
     <div class="tele-stats">
-      <span class="tele-item">Session: <strong id="timer-val">00:00</strong></span>
-      <span class="tele-item">Pace: <strong>240 wpm</strong></span>
-      <span class="tele-item">Status: <strong>Lossless Modern Translation</strong></span>
+      <span class="tele-item" id="tele-loc-item">
+        📍 <span id="tele-loc"><strong>§1 of 8</strong></span> <span class="tele-loc-ch" id="tele-ch-title" style="color: var(--crimson); font-weight:600;">Introduction</span> <span class="tele-sub" id="tele-loc-pct">(12%)</span>
+      </span>
+      <span class="tele-item">
+        📚 Read: <strong id="tele-consumed-count">0</strong> / {total_book_blocks} <span class="tele-sub" id="tele-consumed-pct">(0%)</span>
+      </span>
+      <span class="tele-item">
+        ⏱ Session: <strong id="timer-val">00:00</strong>
+        <button class="tele-timer-btn" id="timer-toggle-btn" onclick="toggleTimer()" title="Pause / Resume">⏸</button>
+      </span>
+      <span class="tele-item">
+        ⚡ Speed: <strong id="tele-speed">240</strong> wpm
+      </span>
+      <span class="tele-item tele-pace-item">
+        🎯 Pacing: <span class="pace-chip on-track" id="pace-chip">16m / ch</span>
+      </span>
     </div>
-    <div style="font-size: 0.74rem; color: var(--text-dim);">
-      💡 Tap any sentence in either column to highlight its corresponding match.
+    <div class="tele-actions">
+      <button class="btn btn-sm" onclick="toggleAccountabilityModal(true)" title="Open Reading Accountability Dashboard">📊 Accountability Stats</button>
     </div>
   </div>
 
@@ -628,6 +986,56 @@ def build_web_app(sections):
       <div class="concept-item">
         <div class="concept-name">5. Revolt (La Révolte)</div>
         <div class="concept-desc">Camus's ultimate conclusion: Knowing life has no cosmic meaning does not justify dying—it demands living with maximum defiance, creativity, and mortal intensity.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accountability & Reading Pacing Modal -->
+  <div class="modal-overlay" id="accountability-modal" onclick="if(event.target===this) toggleAccountabilityModal(false)">
+    <div class="modal-card modal-accountability">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">📊 Reading Velocity & Accountability</h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Track consumption speed, chapter pacing, and active completion.</p>
+        </div>
+        <button class="close-btn" onclick="toggleAccountabilityModal(false)">&times;</button>
+      </div>
+      <div class="acc-grid">
+        <div class="acc-card">
+          <div class="acc-val" id="stat-consumed-paras">0 / {total_book_blocks}</div>
+          <div class="acc-label">Paragraphs Read</div>
+          <div class="acc-sub" id="stat-consumed-pct">0% of entire book</div>
+        </div>
+        <div class="acc-card">
+          <div class="acc-val" id="stat-words-read">0</div>
+          <div class="acc-label">Words Consumed</div>
+          <div class="acc-sub">out of {total_book_words:,} total</div>
+        </div>
+        <div class="acc-card">
+          <div class="acc-val" id="stat-session-time">00:00</div>
+          <div class="acc-label">Active Time</div>
+          <div class="acc-sub">current reading session</div>
+        </div>
+        <div class="acc-card">
+          <div class="acc-val" id="stat-avg-wpm">240</div>
+          <div class="acc-label">Reading Speed</div>
+          <div class="acc-sub">words per minute (WPM)</div>
+        </div>
+      </div>
+
+      <div class="pacing-box">
+        <div class="pacing-title">🎯 College Pacing Benchmark: 15–20 Min / Chapter</div>
+        <div class="pacing-desc" id="pacing-feedback">
+          At your current reading pace, each chapter takes approximately <strong>~16 minutes</strong>. You are maintaining comfortable comprehension speed without getting bogged down in 60-minute slogs!
+        </div>
+      </div>
+
+      <div class="acc-section-title">Chapter Completion Breakdown</div>
+      <div class="chapter-progress-list" id="chapter-progress-rows"></div>
+
+      <div class="modal-footer-actions">
+        <button class="btn btn-danger" onclick="resetAllReadingProgress()">Reset Progress</button>
+        <button class="btn btn-primary" onclick="toggleAccountabilityModal(false)">Back to Reading</button>
       </div>
     </div>
   </div>
@@ -670,7 +1078,6 @@ def build_web_app(sections):
       }}
     }}
 
-    // Hover effect
     document.querySelectorAll('.sent').forEach(el => {{
       el.addEventListener('mouseenter', () => {{
         const sid = el.getAttribute('data-s');
@@ -682,23 +1089,223 @@ def build_web_app(sections):
       }});
     }});
 
-    // Modal & TOC
+    // Modals & Drawers
     function toggleModal(open) {{
       document.getElementById('concepts-modal').classList.toggle('open', open);
     }}
     function toggleTOC(open) {{
       document.getElementById('toc-drawer').classList.toggle('open', open);
     }}
+    function toggleAccountabilityModal(open) {{
+      if (open) renderChapterBreakdown();
+      document.getElementById('accountability-modal').classList.toggle('open', open);
+    }}
 
-    // Session Timer
-    let seconds = 0;
+    // Active Session Stopwatch & Pacing
+    let sessionSeconds = 0;
+    let timerRunning = true;
+    const timerValEl = document.getElementById('timer-val');
+    const timerToggleBtn = document.getElementById('timer-toggle-btn');
+    
+    function toggleTimer() {{
+      timerRunning = !timerRunning;
+      if (timerToggleBtn) timerToggleBtn.textContent = timerRunning ? '⏸' : '▶';
+    }}
+
     setInterval(() => {{
-      seconds++;
-      const mins = Math.floor(seconds / 60);
-      const secs = seconds % 60;
-      document.getElementById('timer-val').textContent = 
-        String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+      if (timerRunning) {{
+        sessionSeconds++;
+        const mins = Math.floor(sessionSeconds / 60);
+        const secs = sessionSeconds % 60;
+        const timeStr = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+        if (timerValEl) timerValEl.textContent = timeStr;
+        const statTimeEl = document.getElementById('stat-session-time');
+        if (statTimeEl) statTimeEl.textContent = timeStr;
+        updatePacingCalculations();
+      }}
     }}, 1000);
+
+    // Reading Accountability & Progress Store
+    const TOTAL_BOOK_BLOCKS = {total_book_blocks};
+    const TOTAL_BOOK_WORDS = {total_book_words};
+    let readCards = {{}};
+    try {{
+      readCards = JSON.parse(localStorage.getItem('sisyphus-consumed-cards') || '{{}}');
+    }} catch(e) {{ readCards = {{}}; }}
+
+    function syncReadCardsUI() {{
+      const cardIds = Object.keys(readCards);
+      let totalWordsRead = 0;
+      cardIds.forEach(cid => {{
+        const card = document.getElementById(cid);
+        if (card) {{
+          card.classList.add('is-read');
+          const btn = document.getElementById(`chk-${{cid}}`);
+          if (btn) {{
+            btn.innerHTML = '<span class="check-icon">✓</span> <span class="check-txt">Read</span>';
+          }}
+          totalWordsRead += (readCards[cid].words || parseInt(card.getAttribute('data-words') || '150'));
+        }}
+      }});
+
+      const count = cardIds.length;
+      const pct = Math.round((count / TOTAL_BOOK_BLOCKS) * 100);
+
+      const countEl = document.getElementById('tele-consumed-count');
+      const pctEl = document.getElementById('tele-consumed-pct');
+      if (countEl) countEl.textContent = count;
+      if (pctEl) pctEl.textContent = `(${{pct}}%)`;
+
+      const statParasEl = document.getElementById('stat-consumed-paras');
+      const statPctEl = document.getElementById('stat-consumed-pct');
+      const statWordsEl = document.getElementById('stat-words-read');
+      if (statParasEl) statParasEl.textContent = `${{count}} / ${{TOTAL_BOOK_BLOCKS}}`;
+      if (statPctEl) statPctEl.textContent = `${{pct}}% of entire book`;
+      if (statWordsEl) statWordsEl.textContent = totalWordsRead.toLocaleString();
+
+      updatePacingCalculations(totalWordsRead);
+    }}
+
+    function toggleMarkRead(pid, words, event) {{
+      if (event) event.stopPropagation();
+      const card = document.getElementById(pid);
+      if (!card) return;
+
+      if (readCards[pid]) {{
+        delete readCards[pid];
+        card.classList.remove('is-read');
+        const btn = document.getElementById(`chk-${{pid}}`);
+        if (btn) btn.innerHTML = '<span class="check-icon">○</span> <span class="check-txt">Mark Read</span>';
+      }} else {{
+        readCards[pid] = {{ words: words, time: Date.now() }};
+        card.classList.add('is-read');
+        const btn = document.getElementById(`chk-${{pid}}`);
+        if (btn) btn.innerHTML = '<span class="check-icon">✓</span> <span class="check-txt">Read</span>';
+      }}
+
+      localStorage.setItem('sisyphus-consumed-cards', JSON.stringify(readCards));
+      syncReadCardsUI();
+      renderChapterBreakdown();
+    }}
+
+    function resetAllReadingProgress() {{
+      if (confirm('Are you sure you want to reset all paragraph reading progress?')) {{
+        readCards = {{}};
+        localStorage.removeItem('sisyphus-consumed-cards');
+        document.querySelectorAll('.pair-card').forEach(c => {{
+          c.classList.remove('is-read');
+          const cid = c.id;
+          const btn = document.getElementById(`chk-${{cid}}`);
+          if (btn) btn.innerHTML = '<span class="check-icon">○</span> <span class="check-txt">Mark Read</span>';
+        }});
+        syncReadCardsUI();
+        renderChapterBreakdown();
+      }}
+    }}
+
+    function updatePacingCalculations(customWords) {{
+      let words = customWords;
+      if (words === undefined) {{
+        words = Object.keys(readCards).reduce((acc, k) => acc + (readCards[k].words || 150), 0);
+      }}
+      const activeMins = sessionSeconds / 60;
+      let wpm = 240;
+      if (activeMins > 0.5 && words > 50) {{
+        wpm = Math.round(words / activeMins);
+      }}
+      const wpmEl = document.getElementById('tele-speed');
+      const statWpmEl = document.getElementById('stat-avg-wpm');
+      if (wpmEl) wpmEl.textContent = `${{wpm}}`;
+      if (statWpmEl) statWpmEl.textContent = `${{wpm}}`;
+
+      const paceChip = document.getElementById('pace-chip');
+      const pacingFeedback = document.getElementById('pacing-feedback');
+      if (paceChip) {{
+        const estMinCh = Math.round(3800 / Math.max(100, wpm));
+        if (wpm >= 200 && wpm <= 350) {{
+          paceChip.className = 'pace-chip on-track';
+          paceChip.textContent = `🎯 On Track (~${{estMinCh}}m/ch)`;
+        }} else if (wpm > 350) {{
+          paceChip.className = 'pace-chip fast';
+          paceChip.textContent = `⚡ Fast (~${{estMinCh}}m/ch)`;
+        }} else {{
+          paceChip.className = 'pace-chip';
+          paceChip.textContent = `📖 Deep Focus (~${{estMinCh}}m/ch)`;
+        }}
+
+        if (pacingFeedback) {{
+          pacingFeedback.innerHTML = `At your current reading pace of <strong>${{wpm}} WPM</strong>, reading a standard chapter takes approximately <strong>~${{estMinCh}} minutes</strong>. Target pace is 15–20 min / chapter.`;
+        }}
+      }}
+    }}
+
+    // Scroll Progress Bar & Dynamic Location Observer
+    const progressBar = document.getElementById('reading-progress-bar');
+    window.addEventListener('scroll', () => {{
+      const scrollY = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (maxScroll > 0 && progressBar) {{
+        const pct = Math.min(100, Math.max(0, (scrollY / maxScroll) * 100));
+        progressBar.style.width = pct + '%';
+      }}
+    }}, {{ passive: true }});
+
+    // IntersectionObserver for Real-time Paragraph Tracking
+    const observer = new IntersectionObserver((entries) => {{
+      entries.forEach(entry => {{
+        if (entry.isIntersecting) {{
+          const card = entry.target;
+          const pIdx = card.getAttribute('data-p-idx');
+          const pTotal = card.getAttribute('data-p-total');
+          const secId = card.getAttribute('data-sec-id');
+          const secEl = document.getElementById(secId);
+          const secTitle = secEl ? (secEl.getAttribute('data-sec-title') || '') : '';
+          const pctCh = Math.round((parseInt(pIdx) / parseInt(pTotal)) * 100);
+
+          const locEl = document.getElementById('tele-loc');
+          const chEl = document.getElementById('tele-ch-title');
+          const pctEl = document.getElementById('tele-loc-pct');
+
+          if (locEl) locEl.innerHTML = `<strong>§${{pIdx}} of ${{pTotal}}</strong>`;
+          if (chEl) chEl.textContent = secTitle.replace(/^[0-9.]+\\s*/, '');
+          if (pctEl) pctEl.textContent = `(${{pctCh}}%)`;
+        }}
+      }});
+    }}, {{ threshold: 0.35 }});
+
+    document.querySelectorAll('.pair-card').forEach(card => observer.observe(card));
+
+    // Chapter Breakdown in Accountability Modal
+    function renderChapterBreakdown() {{
+      const listEl = document.getElementById('chapter-progress-rows');
+      if (!listEl) return;
+      const sections = document.querySelectorAll('.book-section');
+      let html = '';
+      sections.forEach(sec => {{
+        const secId = sec.id;
+        const title = sec.getAttribute('data-sec-title') || secId;
+        const cards = sec.querySelectorAll('.pair-card');
+        const total = cards.length;
+        let readCount = 0;
+        cards.forEach(c => {{
+          if (readCards[c.id]) readCount++;
+        }});
+        const pct = total > 0 ? Math.round((readCount / total) * 100) : 0;
+        html += `
+          <div class="chapter-row">
+            <span class="ch-name" title="${{title}}">${{title}}</span>
+            <span class="ch-ratio">${{readCount}} / ${{total}} (${{pct}}%)</span>
+            <div class="ch-bar">
+              <div class="ch-bar-fill" style="width: ${{pct}}%;"></div>
+            </div>
+          </div>
+        `;
+      }});
+      listEl.innerHTML = html;
+    }}
+
+    // Initialize state
+    syncReadCardsUI();
   </script>
 </body>
 </html>
