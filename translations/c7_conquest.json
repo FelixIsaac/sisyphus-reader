@@ -1,0 +1,436 @@
+{
+  "section_id": "c7_conquest",
+  "part": "Part II: The Absurd Man",
+  "title": "7. Conquest",
+  "pairs": [
+    {
+      "id": "c7-p1",
+      "orig_sentences": [
+        "“No,” says the conqueror, “don’t assume that because I love action I have had to forget how to think.",
+        "On the contrary I can thoroughly define what I believe.",
+        "For I believe it firmly and I see it surely and clearly.",
+        "Beware of those who say: ‘I know this too well to be able to express it.’",
+        "For if they cannot do so, this is because they don’t know it or because out of laziness they stopped at the outer crust."
+      ],
+      "mod_sentences": [
+        "\"No,\" the conqueror declares, \"do not imagine that because I have dedicated myself to action, I have forgotten how to think.\"",
+        "\"On the contrary, I can articulate my convictions with absolute precision.\"",
+        "\"For what I believe, I believe unflinchingly, seeing it with unclouded lucidity.\"",
+        "\"Distrust anyone who insists: 'I understand this truth too deeply to express it in mere words.'\"",
+        "\"If they cannot formulate their thought, it is either because they do not truly comprehend it, or because intellectual sloth led them to stop at the surface.\""
+      ],
+      "move": "The Conqueror as Lucid Thinker (Action is Not Mindlessness). The third absurd archetype is the Conqueror—the person of historical and political engagement. Camus rejects the prejudice that action is anti-philosophical. Genuine action requires rigorous, lucid thought; mystics who hide behind 'ineffable' feelings are merely intellectually lazy."
+    },
+    {
+      "id": "c7-p2",
+      "orig_sentences": [
+        "“I have not many opinions.",
+        "At the end of a life man notices that he has spent years becoming sure of a single truth.",
+        "But a single truth, if it is obvious, is enough to guide an existence.",
+        "As for me, I decidedly have something to say about the individual.",
+        "One must speak of him bluntly and, if need be, with the appropriate contempt."
+      ],
+      "mod_sentences": [
+        "\"I do not carry a vast baggage of philosophical opinions.\"",
+        "\"At the close of an existence, a person discovers that they have spent decades arriving at certainty regarding a solitary truth.\"",
+        "\"Yet a single truth, provided it is self-evident, is more than sufficient to orient an entire life.\"",
+        "\"As for my own compass, I have something decisive to say regarding the individual.\"",
+        "\"One must speak of human nature without sentimentality, and, where honesty demands it, with a measured degree of contempt.\""
+      ],
+      "move": "The Economy of a Single Lucid Truth. Intellectuals multiply complex systems, but existential living demands only one or two self-evident truths tested by lived experience. The conqueror strips away sentimental humanism to assess the real, unvarnished capabilities of mortal human beings."
+    },
+    {
+      "id": "c7-p3",
+      "orig_sentences": [
+        "“A man is more a man through the things he keeps to himself than through those he says.",
+        "There are many that I shall keep to myself.",
+        "But I firmly believe that all those who have judged the individual have done so with much less experience than we on which to base their judgment.",
+        "The intelligence, the stirring intelligence perhaps foresaw what it was essential to note.",
+        "But the era, its ruins, and its blood overwhelm us with facts.",
+        "It was possible for ancient nations, and even for more recent ones down to our machine age, to weigh one against the other the virtues of society and of the individual, to try to find out which was to serve the other.",
+        "To begin with, that was possible by virtue of that stubborn aberration in man’s heart according to which human beings were created to serve or be served.",
+        "In the second place, it was possible because neither society nor the individual had yet revealed all their ability."
+      ],
+      "mod_sentences": [
+        "\"A human being is defined far more by what they keep silent than by what they say aloud.\"",
+        "\"There are vast realities I choose to keep to myself.\"",
+        "\"Yet I am convinced that earlier thinkers who sat in judgment on human nature did so with far less direct historical experience than our generation possesses.\"",
+        "\"Abstract intellect, in all its brilliance, may have anticipated what was worth noticing.\"",
+        "\"Yet our catastrophic historical era, choked with ruins and drenched in blood, confronts us with brutal, undeniable facts.\"",
+        "\"In antiquity, and even through recent centuries leading up to the industrial machine age, philosophers could debate the competing claims of the individual versus the collective, attempting to calculate which entity ought to serve the other.\"",
+        "\"That academic debate was possible, first, because of that obstinate delusion rooted in the human heart that humanity was cosmically designed either to master or to be enslaved.\"",
+        "\"And second, it was possible because neither modern totalitarian societies nor isolated individuals had yet unleashed the full extent of their destructive capacities.\""
+      ],
+      "move": "Historical Catastrophe as Philosophical Laboratory. 20th-century history—wars, ruins, and mechanized slaughter—has permanently destroyed academic debates about whether man was made to serve the state or vice versa. The conqueror speaks from direct historical catastrophe, which stripped away all metaphysical illusions about human nature."
+    },
+    {
+      "id": "c7-p4",
+      "orig_sentences": [
+        "“I have seen bright minds express astonishment at the masterpieces of Dutch painters born at the height of the bloody wars in Flanders, be amazed by the prayers of Silesian mystics brought up during the frightful Thirty Years’ War.",
+        "Eternal values survive secular turmoils before their astonished eyes.",
+        "But there has been progress since.",
+        "The painters of today are deprived of such serenity.",
+        "Even if they have basically the heart the creator needs—I mean the closed heart—it is of no use; for everyone, including the saint himself, is mobilized.",
+        "This is perhaps what I have felt most deeply.",
+        "At every form that miscarries in the trenches, at every outline, metaphor, or prayer crushed under steel, the eternal loses a round.",
+        "Conscious that I cannot stand aloof from my time, I have decided to be an integral part of it.",
+        "This is why I esteem the individual only because he strikes me as ridiculous and humiliated.",
+        "Knowing that there are no victorious causes, I have a liking for lost causes: they require an uncontaminated soul, equal to its defeat as to its temporary victories.",
+        "For anyone who feels bound up with this world’s fate, the clash of civilizations has something agonizing about it.",
+        "I have made that anguish mine at the same time that I wanted to join in.",
+        "Between history and the eternal I have chosen history because I like certainties.",
+        "Of it, at least, I am certain, and how can I deny this force crushing me?"
+      ],
+      "mod_sentences": [
+        "\"I have watched refined intellectuals marvel that Dutch painting produced masterpieces during the blood-soaked campaigns of Flanders, or wonder at the mystical poetry composed in Silesia during the horrors of the Thirty Years' War.\"",
+        "\"Before their admiring gaze, 'eternal spiritual values' supposedly rose untouched above temporal butchery.\"",
+        "\"Yet history has marched forward since then.\"",
+        "\"Contemporary artists can no longer afford such detached serenity.\"",
+        "\"Even if an artist possesses the hard, sheltered heart required for creation, it offers no protection; in our time, every single human being—even the contemplative saint—is drafted into the conflict.\"",
+        "\"This is perhaps the intuition I have experienced most profoundly.\"",
+        "\"With every work of art stillborn in the frontline trenches, with every poetic metaphor or devotional prayer crushed beneath industrial steel, the illusion of eternity suffers another crushing defeat.\"",
+        "\"Recognizing that I cannot retreat into ivory-tower isolation from my era, I have resolved to embed myself entirely within it.\"",
+        "\"This is why I value the individual: precisely because humanity appears to me both absurdly fragile and degraded by modern machinery.\"",
+        "\"Knowing that no historical cause is ever permanently victorious, I hold a deep allegiance to lost causes: they demand an uncompromised spirit, as steadfast in inevitable defeat as in transient triumphs.\"",
+        "\"To anyone who feels their fate bound to the destiny of the world, the violent collision of empires is agonizing.\"",
+        "\"I have claimed that historical anguish as my own, choosing to step directly into the fray.\"",
+        "\"Between the mirage of eternity and the harsh reality of historical time, I choose history, because I insist on tangible certainties.\"",
+        "\"Of historical reality, at least, I am undeniably certain—for how could I possibly deny the very juggernaut that threatens to crush me?\""
+      ],
+      "move": "Total Mobilization: The Death of the Ivory Tower. In previous centuries, a Vermeer or a Silesian mystic could ignore the war outside their window. In the modern age of total war, every human being is mobilized; steel crushes poetry. The conqueror chooses history over eternity because history is concrete, immediate, and inescapable. He champions 'lost causes' because knowing victory is never eternal demands supreme integrity."
+    },
+    {
+      "id": "c7-p5",
+      "orig_sentences": [
+        "“There always comes a time when one must choose between contemplation and action.",
+        "This is called becoming a man.",
+        "Such wrenches are dreadful.",
+        "But for a proud heart there can be no compromise.",
+        "There is God or time, that cross or this sword.",
+        "This world has a higher meaning that transcends its worries, or nothing is true but those worries.",
+        "One must live with time and die with it, or else elude it for a greater life.",
+        "I know that one can compromise and live in the world while believing in the eternal.",
+        "That is called accepting.",
+        "But I loathe this term and want all or nothing.",
+        "If I choose action, don’t think that contemplation is like an unknown country to me.",
+        "But it cannot give me everything, and, deprived of the eternal, I want to ally myself with time.",
+        "I do not want to put down to my account either nostalgia or bitterness, and I merely want to see clearly.",
+        "I tell you, tomorrow you will be mobilized.",
+        "For you and for me that is a liberation.",
+        "The individual can do nothing and yet he can do everything.",
+        "In that wonderful unattached state you understand why I exalt and crush him at one and the same time.",
+        "It is the world that pulverizes him and I who liberate him.",
+        "I provide him with all his rights."
+      ],
+      "mod_sentences": [
+        "\"A moment inevitably arrives when a person must choose between detached contemplation and direct action.\"",
+        "\"This crisis is what marks the transition into full adulthood.\"",
+        "\"Such ruptures tear at the soul.\"",
+        "\"Yet for a proud spirit, there can be no comfortable compromise.\"",
+        "\"There is either God or historical time—the religious cross or the revolutionary sword.\"",
+        "\"Either this universe possesses a transcendent meaning that redeems human suffering, or nothing is real except that suffering itself.\"",
+        "\"One must either live and perish within the stream of time, or evade it in pursuit of an imaginary afterlife.\"",
+        "\"I know well that many choose a lukewarm compromise: living in the physical world while quietly consoling themselves with hopes of eternity.\"",
+        "\"They call that pragmatic acceptance.\"",
+        "\"I despise the very word; I demand all or nothing.\"",
+        "\"If I throw myself into action, do not imagine that intellectual contemplation is foreign territory to me.\"",
+        "\"Yet contemplation cannot grant me the whole of reality; denied access to eternity, I choose to make common cause with time.\"",
+        "\"I refuse to burden my account with either backward-looking nostalgia or impotent bitterness; my sole ambition is to see reality without blinders.\"",
+        "\"Mark my words: tomorrow, you too will be mobilized into the historical struggle.\"",
+        "\"For both of us, that conscription is a profound liberation.\"",
+        "\"Stripped of cosmic purpose, the individual is utterly helpless, yet simultaneously capable of everything.\"",
+        "\"In that state of absolute detachment, you can see why I glorify the individual even while acknowledging his insignificance.\"",
+        "\"It is the blind universe that grinds him to dust; it is I who grant him existential freedom.\"",
+        "\"I restore to him the full inventory of his earthly rights.\""
+      ],
+      "move": "The Cross or the Sword: The Refusal of Compromise. Camus rejects the intellectual cowardice of straddling both worlds—enjoying earthly privileges while banking on heavenly salvation. The absurd demands an absolute choice: either the universe has transcendent meaning, or mortal history is all we have. By choosing the sword of historical engagement, the conqueror liberates man from cosmic servitude."
+    },
+    {
+      "id": "c7-p6",
+      "orig_sentences": [
+        "“Conquerors know that action is in itself useless.",
+        "There is but one useful action, that of remaking man and the earth.",
+        "I shall never remake men.",
+        "But one must do ‘as if.’",
+        "For the path of struggle leads me to the flesh.",
+        "Even humiliated, the flesh is my only certainty.",
+        "I can live only on it.",
+        "The creature is my native land.",
+        "This is why I have chosen this absurd and ineffectual effort.",
+        "This is why I am on the side of the struggle.",
+        "The epoch lends itself to this, as I have said.",
+        "Hitherto the greatness of a conqueror was geographical.",
+        "It was measured by the extent of the conquered territories.",
+        "There is a reason why the word has changed in meaning and has ceased to signify the victorious general.",
+        "The greatness has changed camp.",
+        "It lies in protest and the blind-alley sacrifice.",
+        "There, too, it is not through a preference for defeat.",
+        "Victory would be desirable.",
+        "But there is but one victory, and it is eternal.",
+        "That is the one I shall never have.",
+        "That is where I stumble and cling.",
+        "A revolution is always accomplished against the gods, beginning with the revolution of Prometheus, the first of modern conquerors.",
+        "It is man’s demands made against his fate; the demands of the poor are but a pretext.",
+        "Yet I can seize that spirit only in its historical act, and that is where I make contact with it.",
+        "Don’t assume, however, that I take pleasure in it: opposite the essential contradiction, I maintain my human contradiction.",
+        "I establish my lucidity in the midst of what negates it.",
+        "I exalt man before what crushes him, and my freedom, my revolt, and my passion come together then in that tension, that lucidity, and that vast repetition."
+      ],
+      "mod_sentences": [
+        "\"Genuine conquerors know that political action is, in the cosmic sense, utterly futile.\"",
+        "\"There is only one action that would truly matter: to fundamentally remake human nature and the earth.\"",
+        "\"I will never succeed in remaking humanity.\"",
+        "\"Yet one must act 'as if' such transformation were possible.\"",
+        "\"For the path of active struggle binds me directly to physical existence.\"",
+        "\"Even when degraded and broken, mortal flesh remains my only undeniable certainty.\"",
+        "\"I can draw sustenance from nothing else; living humanity is my only homeland.\"",
+        "\"This is why I have committed myself to this absurd, inconclusive struggle.\"",
+        "\"This is why I stand unconditionally on the side of human resistance.\"",
+        "\"Our historical era demands this stance, as I have already shown.\"",
+        "\"In the past, a conqueror's glory was purely geographical, measured by the acreage of annexed soil.\"",
+        "\"There is a profound reason why that title has shifted meaning and no longer designates a victorious general.\"",
+        "\"True conquest has switched sides.\"",
+        "\"Today, greatness resides in active resistance and the lucid sacrifice made inside a historical cul-de-sac.\"",
+        "\"Here again, this is not born from a morbid infatuation with failure.\"",
+        "\"Definitive victory would be magnificent.\"",
+        "\"Yet there is only one ultimate victory, and that victory is eternal—the very triumph I can never possess.\"",
+        "\"That is the boundary against which I stumble, and to which I stubbornly cling.\"",
+        "\"Every authentic revolution is fundamentally waged against the gods, beginning with the revolt of Prometheus, the earliest modern conqueror.\"",
+        "\"It represents humanity's defiance hurled against cosmic destiny; economic demands are merely the immediate pretext.\"",
+        "\"Yet I can apprehend that spirit of rebellion only when it crystallizes in historical action; that is where I engage it directly.\"",
+        "\"Do not imagine, however, that I indulge in cheap romanticism: confronting the cosmic contradiction of existence, I hold fast to my human integrity.\"",
+        "\"I establish my clarity directly in the face of what seeks to destroy it.\"",
+        "\"I elevate human dignity before the forces that crush it—and my freedom, my revolt, and my passion coalesce in that unyielding tension, that radical clarity, and that endless, defiant repetition.\""
+      ],
+      "move": "The Promethean Revolution (Conquest Redefined). The conqueror is no longer an imperial general conquering geography; he is the Promethean rebel defying cosmic fate. Political revolution is ostensibly about economic grievances, but at its deepest metaphysical level, it is humanity's protest against mortality and cosmic silence. Knowing that ultimate victory is impossible, the conqueror fights anyway out of loyalty to mortal flesh."
+    },
+    {
+      "id": "c7-p7",
+      "orig_sentences": [
+        "“Yes, man is his own end.",
+        "And he is his only end.",
+        "If he aims to be something, it is in this life.",
+        "Now I know it only too well.",
+        "Conquerors sometimes talk of vanquishing and overcoming.",
+        "But it is always ‘overcoming oneself’ that they mean.",
+        "You are well aware of what that means.",
+        "Every man has felt himself to be the equal of a god at certain moments.",
+        "At least, this is the way it is expressed.",
+        "But this comes from the fact that in a flash he felt the amazing grandeur of the human mind.",
+        "The conquerors are merely those among men who are conscious enough of their strength to be sure of living constantly on those heights and fully aware of that grandeur.",
+        "It is a question of arithmetic, of more or less.",
+        "The conquerors are capable of the more.",
+        "But they are capable of no more than man himself when he wants.",
+        "This is why they never leave the human crucible, plunging into the seething soul of revolutions."
+      ],
+      "mod_sentences": [
+        "\"Yes, human beings are their own end and purpose.\"",
+        "\"Indeed, they are their only purpose.\"",
+        "\"If a person is to achieve significance, it must be realized strictly within this mortal life.\"",
+        "\"I understand this now with absolute clarity.\"",
+        "\"Conquerors occasionally use the language of vanquishing and overcoming.\"",
+        "\"Yet what they truly mean is overcoming themselves.\"",
+        "\"You understand perfectly what that signifies.\"",
+        "\"Every human being has experienced moments where they felt equal to a god.\"",
+        "\"At least, that is how the intuition is traditionally phrased.\"",
+        "\"In reality, that sensation arises because in a sudden flash of insight, one perceives the staggering majesty of human consciousness.\"",
+        "\"Conquerors are simply those rare individuals whose awareness of their own capacity is strong enough to dwell permanently upon those heights, fully conscious of that majesty.\"",
+        "\"It is purely a matter of arithmetic—of degree, of more or less.\"",
+        "\"Conquerors are capable of sustaining that intensity longer.\"",
+        "\"Yet they are capable of nothing beyond what any human being can achieve whenever they genuinely resolve to do so.\"",
+        "\"This is why they never desert the human battleground, choosing instead to plunge directly into the incandescent core of revolution.\""
+      ],
+      "move": "Man as His Own Sole End. Overcoming external enemies is a trivial distraction; the conqueror's true victory is overcoming his own fear, apathy, and hunger for transcendent illusions. Feeling 'like a god' is simply experiencing the full, uncompromised power of human consciousness."
+    },
+    {
+      "id": "c7-p8",
+      "orig_sentences": [
+        "“There they find the creature mutilated, but they also encounter there the only values they like and admire, man and his silence.",
+        "This is both their destitution and their wealth.",
+        "There is but one luxury for them—that of human relations.",
+        "How can one fail to realize that in this vulnerable universe everything that is human and solely human assumes a more vivid meaning?",
+        "Taut faces, threatened fraternity, such strong and chaste friendship among men—these are the true riches because they are transitory.",
+        "In their midst the mind is most aware of its powers and limitations.",
+        "That is to say, its efficacy.",
+        "Some have spoken of genius.",
+        "But genius is easy to say; I prefer the intelligence.",
+        "It must be said that it can be magnificent then.",
+        "It lights up this desert and dominates it.",
+        "It knows its obligations and illustrates them.",
+        "It will die at the same time as this body.",
+        "But knowing this constitutes its freedom."
+      ],
+      "mod_sentences": [
+        "\"In the heart of that struggle, conquerors witness humanity battered and mutilated, yet they also encounter the only realities they respect and revere: mortal human beings and their stoic silence.\"",
+        "\"In this silence resides both their profound destitution and their sovereign wealth.\"",
+        "\"They permit themselves only a single luxury: the warmth of authentic human solidarity.\"",
+        "\"How could anyone fail to see that within this defenseless universe, whatever is human—and exclusively human—acquires an intensely vivid significance?\"",
+        "\"Weather-beaten faces, solidarity forged under common peril, the fierce and uncorrupted friendship between comrades—these are life's genuine treasures, precious precisely because they are perishable.\"",
+        "\"In the crucible of shared struggle, human consciousness becomes acutely aware of its genuine strengths and its inescapable limitations.\"",
+        "\"That is to say, it discovers its practical power.\"",
+        "\"Commentators love to invoke the word 'genius.'\"",
+        "\"Yet 'genius' is a cheap label; I prefer clear-eyed intelligence.\"",
+        "\"And that intelligence can indeed achieve true magnificence.\"",
+        "\"It illuminates the barren desert of existence and asserts mastery over it.\"",
+        "\"It recognizes its mortal duties and gives them living form.\"",
+        "\"It will perish at the exact instant this body draws its final breath.\"",
+        "\"Yet the lucid recognition of that mortality is the very foundation of its freedom.\""
+      ],
+      "move": "Fragile Fraternity in the Desert (The Solidarity of Comrades). Because the universe is silent and cold, human connection becomes infinitely precious. Comradeship under mortal threat—the 'taut faces' of fighters—is valuable precisely because it will not last forever. Intelligence recognizes its own finitude, and that lucidity constitutes its sovereign freedom."
+    },
+    {
+      "id": "c7-p9",
+      "orig_sentences": [
+        "“We are not ignorant of the fact that all churches are against us.",
+        "A heart so keyed up eludes the eternal, and all churches, divine or political, lay claim to the eternal.",
+        "Happiness and courage, retribution or justice are secondary ends for them.",
+        "It is a doctrine they bring, and one must subscribe to it.",
+        "But I have no concern with ideas or with the eternal.",
+        "The truths that come within my scope can be touched with the hand.",
+        "I cannot separate from them.",
+        "This is why you cannot base anything on me: nothing of the conqueror lasts, not even his doctrines."
+      ],
+      "mod_sentences": [
+        "\"We are fully aware that every established church stands aligned against us.\"",
+        "\"A heart keyed to such fierce temporal intensity escapes the grip of eternity—and every orthodox church, whether theological or political, stakes its power on the eternal.\"",
+        "\"For them, earthly happiness and personal courage, moral vindication and social justice are merely secondary instruments.\"",
+        "\"What they bring is an inflexible dogma, and they demand that everyone submit to it.\"",
+        "\"Yet I have no use for abstract ideological systems or promises of eternity.\"",
+        "\"The only truths that hold value for me are those I can grasp with my own two hands.\"",
+        "\"I cannot sever my allegiance from concrete reality.\"",
+        "\"This is why you cannot erect an enduring monument upon my shoulders: nothing the conqueror achieves is permanent, not even his own ideas.\""
+      ],
+      "move": "All Churches—Divine or Secular-Totalitarian—Demand Surrender. The conqueror rejects both the theological Church and totalitarian political parties (the secular churches of communism/fascism). Both demand that the living individual sacrifice their immediate mortal happiness for an abstract dogma promising future salvation. The absurd rebel trusts only what can be touched with the hand."
+    },
+    {
+      "id": "c7-p10",
+      "orig_sentences": [
+        "“At the end of all that, despite everything, is death.",
+        "We know also that it ends everything.",
+        "This is why those cemeteries all over Europe, which obsess some among us, are hideous.",
+        "People beautify only what they love, and death repels us and tires our patience.",
+        "It, too, is to be conquered.",
+        "The last Carrara, a prisoner in Padua emptied by the plague and besieged by the Venetians, ran screaming through the halls of his deserted palace: he was calling on the devil and asking him for death.",
+        "This was a way of overcoming it.",
+        "And it is likewise a mark of courage characteristic of the Occident to have made so ugly the places where death thinks itself honored.",
+        "In the rebel’s universe, death exalts injustice.",
+        "It is the supreme abuse."
+      ],
+      "mod_sentences": [
+        "\"At the conclusion of every endeavor, waiting despite everything, is death.\"",
+        "\"And we know beyond doubt that death terminates all things.\"",
+        "\"This is why the sprawling cemeteries across Europe, which haunt the minds of so many, are so hideous.\"",
+        "\"Human beings adorn and beautify only what they love; death disgusts us and exhausts our patience.\"",
+        "\"Death, too, must be met with defiance.\"",
+        "\"The last Prince of Carrara, trapped as a prisoner inside a Padua devastated by plague and besieged by the Venetian army, sprinted shrieking through the echoing corridors of his deserted palace, summoning the Devil and demanding to be struck down.\"",
+        "\"That mad fury was his way of defying death.\"",
+        "\"And it is equally a testament to Western courage to have rendered deliberately ugly the burial grounds where death presumes to be revered.\"",
+        "\"Within the universe of the rebel, death is not a sacred mystery, but the ultimate vindication of injustice.\"",
+        "\"It is the supreme outrage committed against human existence.\""
+      ],
+      "move": "Death as the Supreme Outrage (The Prince of Carrara). Unlike Christian theology which sanctifies death as a portal to eternal life, the absurd rebel views death as the ultimate physical outrage and cosmic injustice. The ugly, unadorned Western cemetery reflects honest horror; the Prince of Carrara running screaming through his plague-emptied palace exemplifies defiant fury rather than pious resignation."
+    },
+    {
+      "id": "c7-p11",
+      "orig_sentences": [
+        "“Others, without compromising either, have chosen the eternal and denounced the illusion of this world.",
+        "Their cemeteries smile amid numerous flowers and birds.",
+        "That suits the conqueror and gives him a clear image of what he has rejected.",
+        "He has chosen, on the contrary, the black iron fence or the potter’s field.",
+        "The best among the men of God occasionally are seized with fright mingled with consideration and pity for minds that can live with such an image of their death.",
+        "Yet those minds derive their strength and justification from this.",
+        "Our fate stands before us and we provoke him.",
+        "Less out of pride than out of awareness of our ineffectual condition.",
+        "We, too, sometimes feel pity for ourselves.",
+        "It is the only compassion that seems acceptable to us: a feeling that perhaps you hardly understand and that seems to you scarcely virile.",
+        "Yet the most daring among us are the ones who feel it.",
+        "But we call the lucid ones virile and we do not want a strength that is apart from lucidity.”"
+      ],
+      "mod_sentences": [
+        "\"Other thinkers, equally uncompromising, have chosen the path of eternity and denounced this earthly world as a hollow illusion.\"",
+        "\"Their landscaped cemeteries seem to smile with lush flowers and the singing of birds.\"",
+        "\"That pastoral decor suits the conqueror well enough, providing him with a stark portrait of the comforting illusions he has firmly rejected.\"",
+        "\"He chooses instead the stark black iron railing and the pauper's burial plot.\"",
+        "\"Even the most perceptive men of faith are occasionally gripped by dread, mixed with reluctant respect and sorrow, when contemplating minds capable of living with such an unvarnished expectation of annihilation.\"",
+        "\"Yet it is from this very dread that such minds draw their resolve and moral vindication.\"",
+        "\"Our mortal destiny looms directly before us, and we look it in the eye and provoke it.\"",
+        "\"We do so not out of theatrical arrogance, but out of absolute lucidity regarding our helpless condition.\"",
+        "\"We, too, occasionally feel a deep compassion for our own fragile state.\"",
+        "\"It is the only pity we find acceptable: an emotion you may struggle to understand, and which might strike you as insufficiently resolute.\"",
+        "\"Yet it is the most courageous among us who experience it most keenly.\"",
+        "\"For we reserve the word 'resolute' for those who live in radical clarity, and we reject any form of strength divorced from truth.\""
+      ],
+      "move": "The Pauper's Grave and Lucid Compassion. Religious cemeteries are made pretty with flowers and birds to mask death; the absurd rebel prefers the raw, unadorned iron fence and the common pauper's grave. Facing total annihilation without flinching requires authentic courage. Self-compassion is not weakness; it is the tender, lucid recognition of humanity's precarious, doomed beauty."
+    },
+    {
+      "id": "c7-p12",
+      "orig_sentences": [
+        "Let me repeat that these images do not propose moral codes and involve no judgments: they are sketches.",
+        "They merely represent a style of life.",
+        "The lover, the actor, or the adventurer plays the absurd.",
+        "But equally well, if he wishes, the chaste man, the civil servant, or the president of the Republic.",
+        "It is enough to know and to mask nothing.",
+        "In Italian museums are sometimes found little painted screens that the priest used to hold in front of the face of condemned men to hide the scaffold from them.",
+        "The leap in all its forms, rushing into the divine or the eternal, surrendering to the illusions of the everyday or of the idea—all these screens hide the absurd.",
+        "But there are civil servants without screens, and they are the ones of whom I mean to speak."
+      ],
+      "mod_sentences": [
+        "Let me reiterate that these portraits do not constitute a moral system, nor do they pronounce ethical judgments: they are illustrative sketches.",
+        "They depict a distinct style of existence.",
+        "The persistent lover, the consummate actor, and the historical adventurer embody the absurd.",
+        "Yet the chaste ascetic, the mundane government bureaucrat, or the president of a republic can inhabit the absurd just as authentically.",
+        "The sole requirement is to perceive reality clearly and conceal nothing from oneself.",
+        "In Italian museums, one occasionally encounters small painted handheld screens that priests once held before the eyes of condemned prisoners on their march to execution, shielding them from the sight of the scaffold.",
+        "Every form of the existential leap—whether fleeing into theological dogmas, retreating into secular utopias, or drowning oneself in daily bureaucratic routine—serves as one of these painted screens to hide the sight of the absurd.",
+        "Yet there are clerks and bureaucrats who refuse these screens, and it is of them that I ultimately speak."
+      ],
+      "move": "The Priest's Painted Screen (The Archetype of Evasion). In Renaissance Italy, priests held painted panels before the eyes of condemned men so they wouldn't see the guillotine or gallows. Camus turns this into an unforgettable concrete anchor: all metaphysics, religious dogmas, and political utopias are painted screens held up to shield dying humans from the scaffold of existence. The absurd man pushes the screen aside to look directly at the scaffold."
+    },
+    {
+      "id": "c7-p13",
+      "orig_sentences": [
+        "I have chosen the most extreme ones.",
+        "At this level the absurd gives them a royal power.",
+        "It is true that those princes are without a kingdom.",
+        "But they have this advantage over others: they know that all royalties are illusory.",
+        "They know that is their whole nobility, and it is useless to speak in relation to them of hidden misfortune or the ashes of disillusion.",
+        "Being deprived of hope is not despairing.",
+        "The flames of earth are surely worth celestial perfumes.",
+        "Neither I nor anyone can judge them here.",
+        "They are not striving to be better; they are attempting to be consistent.",
+        "If the term “wise man” can be applied to the man who lives on what he has without speculating on what he has not, then they are wise men.",
+        "One of them, a conqueror but in the realm of mind, a Don Juan but of knowledge, an actor but of the intelligence, knows this better than anyone: “You nowise deserve a privilege on earth and in heaven for having brought to perfection your dear little meek sheep; you nonetheless continue to be at best a ridiculous dear little sheep with horns and nothing more—even supposing that you do not burst with vanity and do not create a scandal by posing as a judge.”"
+      ],
+      "mod_sentences": [
+        "I have focused here upon the most extreme examples.",
+        "At this heightened pitch, the absurd confers upon them a sovereign authority.",
+        "It is true that these princes possess no physical realm.",
+        "Yet they hold this decisive advantage over the rest of humanity: they know that all worldly and heavenly kingdoms are mere illusions.",
+        "They recognize that this lucidity constitutes their entire nobility, and it is pointless to pity them or talk of secret despair and the bitter ashes of disillusion.",
+        "To live without hope is not at all the same as living in despair.",
+        "The tangible fires of this earth are unquestionably worth more than all the hypothetical perfumes of paradise.",
+        "Neither I nor anyone else has the standing to sit in judgment upon them.",
+        "They are not striving toward conventional moral improvement; they are laboring to achieve internal consistency.",
+        "If the title of 'sage' can properly be applied to the person who lives entirely upon what they possess without gambling on what they do not have, then these individuals are true sages.",
+        "One of them—a conqueror within the territory of thought, a Don Juan of knowledge, an actor of the intellect—expressed this truth better than anyone: 'You deserve no special privilege on earth or in heaven simply because you have fattened and perfected your meek little sheep; you remain, at best, an absurd little horned sheep and nothing more—even assuming you do not swell with self-righteous vanity and cause a scandal by setting yourself up as a moral judge.'"
+      ],
+      "move": "Princes Without a Kingdom: Nietzsche's Sheep. Camus crowns the absurd heroes (Don Juan, the Actor, the Conqueror) as 'princes without a kingdom.' Living without hope is not despair; earthly flames eclipse heavenly vapors. Citing Nietzsche (Thus Spoke Zarathustra), Camus mocks conventional moralists who mistake their domesticated, herd virtues ('meek little sheep') for cosmic righteousness."
+    },
+    {
+      "id": "c7-p14",
+      "orig_sentences": [
+        "In any case, it was essential to restore to the absurd reasoning more cordial examples.",
+        "The imagination can add many others, inseparable from time and exile, who likewise know how to live in harmony with a universe without future and without weakness.",
+        "This absurd, godless world is, then, peopled with men who think clearly and have ceased to hope.",
+        "And I have not yet spoken of the most absurd character, who is the creator."
+      ],
+      "mod_sentences": [
+        "In any case, it was necessary to ground the abstract logic of the absurd in these warmer, more tangible human archetypes.",
+        "The imagination could easily supply many others, bound equally to the constraints of time and earthly exile, who likewise understand how to live in harmony with a universe that offers no future and tolerates no weakness.",
+        "This absurd, godless cosmos is populated, then, by human beings who think with radical clarity and have entirely ceased to live on hope.",
+        "And I have not yet addressed the most absurd figure of all: the creative artist."
+      ],
+      "move": "Bridge to Part III: The Creator. Camus closes Part II by summarizing the common thread of the three archetypes: they are lucid individuals who have abandoned hope to inhabit time and exile fully. Having examined the seducer, the actor, and the conqueror, Camus sets the stage for the supreme absurd hero of Part III: the Creator."
+    }
+  ]
+}

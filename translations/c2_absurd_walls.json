@@ -1,0 +1,112 @@
+{
+  "section_id": "c2_absurd_walls",
+  "part": "Part I: An Absurd Reasoning",
+  "title": "2. Absurd Walls",
+  "pairs": [
+    {
+      "id": "c2-p1",
+      "orig_sentences": [
+        "It happens that the stage sets collapse.",
+        "Rising, streetcar, four hours in the office or the factory, meal, streetcar, four hours of work, meal, sleep, and Monday Tuesday Wednesday Thursday Friday and Saturday according to the same rhythm\u2014this path is easily followed most of the time.",
+        "But one day the \u201cwhy\u201d arises and everything begins in that weariness tinged with amazement.",
+        "\u201cBegins\u201d\u2014this is important.",
+        "Weariness comes at the end of the acts of a mechanical life, but at the same time it inaugurates the impulse of consciousness.",
+        "It awakens consciousness and provokes what follows.",
+        "What follows is the gradual return into the chain or it is the definitive awakening."
+      ],
+      "mod_sentences": [
+        "Yet there are times when the theatrical scenery collapses.",
+        "Waking, the streetcar, four hours in the office or factory, a meal, the streetcar, four hours of labor, a meal, sleep, and Monday, Tuesday, Wednesday, Thursday, Friday, and Saturday unfolding to the identical rhythm\u2014this routine is followed effortlessly for years.",
+        "Yet one day, the question 'Why?' arises, and everything begins in a state of weariness mingled with astonishment.",
+        "'Begins'\u2014this distinction is vital.",
+        "Exhaustion concludes a life of mechanical habit, yet it simultaneously inaugurates the birth of genuine consciousness.",
+        "It shakes the mind awake and provokes what follows: either a gradual return to the chains of routine, or a definitive, permanent awakening."
+      ],
+      "move": "Camus charts the sudden collapse of daily autopilot. The routine protects us from awareness; the intrusion of 'Why?' ends unconscious existence and forces a choice between conscious lucidity or relapse into stupor."
+    },
+    {
+      "id": "c2-p2",
+      "orig_sentences": [
+        "We live on the future: \u201ctomorrow,\u201d \u201clater on,\u201d \u201cwhen you have made your way,\u201d \u201cyou will understand when you are old enough.\u201d",
+        "Such irrelevancies are wonderful, for, after all, it\u2019s a matter of dying.",
+        "Yet a day comes when a man notices or says that he is thirty.",
+        "Thus he asserts his youth.",
+        "But simultaneously he situates himself in relation to time.",
+        "He takes his place in it.",
+        "He admits that he stands at a certain point on a curve that he acknowledges having to travel to its end.",
+        "He belongs to time, and by the horror that seizes him, he recognizes his worst enemy.",
+        "Tomorrow, he was longing for tomorrow, whereas everything in him ought to reject it.",
+        "That revolt of the flesh is the absurd."
+      ],
+      "mod_sentences": [
+        "We live constantly leaning into the future: 'tomorrow,' 'later on,' 'once you have made your mark,' 'you will understand when you are older.'",
+        "Such postponements are astonishingly ironic, for in the final analysis, they all lead to death.",
+        "Yet a day comes when a man observes or announces that he is thirty.",
+        "He thereby affirms his youth, yet simultaneously positions himself upon the arc of time.",
+        "He realizes he occupies a fixed point on an irreversible curve that must be traveled to its inevitable conclusion.",
+        "He belongs to time, and in the horror that grips him, he recognizes his deadliest adversary.",
+        "Yesterday, he was yearning for tomorrow to arrive\u2014when in truth, every instinct of his physical being ought to recoil from it.",
+        "That instinctive revolt of the flesh against time is the absurd."
+      ],
+      "move": "The betrayal of time. We live on credit projected into the future, forgetting that the destination is death. Turning thirty marks the threshold where time ceases to be an ally and reveals itself as an executioner."
+    },
+    {
+      "id": "c2-p3",
+      "orig_sentences": [
+        "Men, too, secrete the inhuman.",
+        "At certain moments of lucidity, the mechanical aspect of their gestures, their meaningless pantomime makes silly everything that surrounds them.",
+        "A man is talking on the telephone behind a glass partition; you cannot hear him, but you see his incomprehensible dumb show: you wonder why he is alive.",
+        "This discomfort in the face of man\u2019s own inhumanity, this incalculable tumble before the image of what we are, this \u201cnausea,\u201d as a writer of today calls it, is also the absurd.",
+        "Likewise the stranger who at certain seconds comes to meet us in a mirror, the familiar and yet alarming brother we encounter in our own photographs is also the absurd."
+      ],
+      "mod_sentences": [
+        "Human beings, too, emit this quality of the non-human.",
+        "In flashes of detached lucidity, the mechanical nature of human gestures and our meaningless pantomime render everything around us grotesque.",
+        "A man speaks into a telephone behind a soundproof glass partition; one cannot hear his words, but one observes his incomprehensible gestures: one wonders why such a creature exists.",
+        "This unease before humanity's own mechanical strangeness, this vertigo when confronted by what we actually appear to be\u2014this 'nausea,' as a contemporary writer terms it\u2014is also the absurd.",
+        "Likewise, that stranger who unexpectedly confronts us in a mirror, or the familiar yet disturbing double staring back from an old photograph, is also the absurd."
+      ],
+      "move": "The phone booth thought experiment and the mirror uncanny. When human behavior is stripped of context, its mechanical puppetry is exposed, inducing existential nausea (referencing Sartre)."
+    },
+    {
+      "id": "c2-p4",
+      "orig_sentences": [
+        "I said that the world is absurd, but I was too hasty.",
+        "This world in itself is not reasonable, that is all that can be said.",
+        "But what is absurd is the confrontation of this irrational and the wild longing for clarity whose call echoes in the human heart.",
+        "The absurd depends as much on man as on the world.",
+        "For the moment it is all that links them together.",
+        "It binds them one to the other as only hatred can weld two creatures together.",
+        "This is all I can discern clearly in this measureless universe where my adventure takes place."
+      ],
+      "mod_sentences": [
+        "I stated earlier that the world is absurd, yet I spoke too hastily.",
+        "The universe in itself is not reasonable; that is all one can legitimately affirm.",
+        "What is genuinely absurd is the confrontation between this irrational world and the profound hunger for clarity echoing within the human soul.",
+        "The absurd depends as much upon human consciousness as it does upon the cosmic silence.",
+        "For now, it is the sole bond linking them together\u2014uniting them as only relentless antagonism can weld two adversaries in combat.",
+        "This is all I can perceive with certainty in this measureless universe."
+      ],
+      "move": "The core philosophical correction. The universe is not absurd; it is simply indifferent. The Absurd is strictly relational: the friction generated when human longing strikes cosmic silence."
+    },
+    {
+      "id": "c2-p5",
+      "orig_sentences": [
+        "At this point of his effort man stands face to face with the irrational.",
+        "He feels within him his longing for happiness and for reason.",
+        "The absurd is born of this confrontation between the human need and the unreasonable silence of the world.",
+        "This must not be forgotten.",
+        "This must be clung to because the whole consequence of a life can depend on it.",
+        "The irrational, the human nostalgia, and the absurd that is born of their encounter\u2014these are the three characters in the drama that must necessarily end with all the logic of which an existence is capable."
+      ],
+      "mod_sentences": [
+        "At this stage of his inquiry, man stands face to face with the irrational.",
+        "He feels within his breast two inescapable longings: the desire for happiness and the demand for reason.",
+        "The absurd is born of this direct collision between human yearning and the silence of the universe.",
+        "This core reality must not be surrendered, for the entire consequence of a life depends upon it.",
+        "The irrational cosmos, human longing, and the absurd born of their encounter\u2014these are the three characters in the tragedy, and the drama must be played out with all the rigorous logic of which a human existence is capable."
+      ],
+      "move": "The tripartite drama of existence: (1) The Irrational World, (2) Human Longing, and (3) The Absurd. Any philosophy that tries to eliminate one character is cheating."
+    }
+  ]
+}

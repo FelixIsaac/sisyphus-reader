@@ -1,0 +1,69 @@
+# Dual License Terms
+
+This repository contains two distinct categories of work, each governed by its own licensing terms:
+
+1. **Software & Build Engine:** Licensed under the **MIT License**.
+2. **Original Modern Literary Translation, Critical Annotations, and Philosophical Commentary:** Licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)**.
+
+---
+
+## 1. Software License (MIT License)
+
+**Applicable to:** All build automation scripts (`*.py`), web reader source code (`index.html`, CSS, client-side JavaScript), layout engines, data parsers, and deployment configurations.
+
+```
+MIT License
+
+Copyright (c) 2026 Felix Lim and The Sisyphus Critical Edition Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+---
+
+## 2. Content & Editorial License (CC BY-NC-SA 4.0)
+
+**Applicable to:** The Dignified Modern Literary English translation, the "Philosophical Move" analytical keys, philosophical commentaries, architectural diagrams, and documentation in `translations/`, `myth_of_sisyphus_modern_translation.md`, and `.agents/`.
+
+```
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License
+
+By exercising the Licensed Rights, You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License ("Public License"). 
+
+You are free to:
+- Share — copy and redistribute the material in any medium or format
+- Adapt — remix, transform, and build upon the material
+
+Under the following terms:
+- Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+- NonCommercial — You may NOT use the material for commercial purposes.
+- ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
+- No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+Full Legal Code: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+```
+
+---
+
+## 3. Third-Party Rights & Fair Use Notice
+
+- **Original French Work:** *Le Mythe de Sisyphe* by Albert Camus © 1942 Éditions Gallimard.
+- **Historic English Translation:** Translated by Justin O'Brien © 1955 Alfred A. Knopf, Inc. / Vintage Books (Penguin Random House).
+- **Fair Use / Fair Dealing:** Historic quotations included in this repository are presented solely for non-profit educational study, critical analysis, and comparative literary scholarship under Section 107 of the United States Copyright Act (17 U.S.C. § 107) and Sections 190–194 of the Singapore Copyright Act 2021.
+- Please refer to [LEGAL.md](./LEGAL.md) for full legal disclosures, fair use analysis, and our copyright takedown policy.

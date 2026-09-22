@@ -1,0 +1,180 @@
+{
+  "section_id": "c1_absurdity_and_suicide",
+  "part": "Part I: An Absurd Reasoning",
+  "title": "1. Absurdity and Suicide",
+  "pairs": [
+    {
+      "id": "c1-p1",
+      "orig_sentences": [
+        "There is but one truly serious philosophical problem, and that is suicide.",
+        "Judging whether life is or is not worth living amounts to answering the fundamental question of philosophy.",
+        "All the rest\u2014whether or not the world has three dimensions, whether the mind has nine or twelve categories\u2014comes afterwards.",
+        "These are games; one must first answer.",
+        "And if it is true, as Nietzsche claims, that a philosopher, to deserve our respect, must preach by example, you can appreciate the importance of that reply, for it will precede the definitive act.",
+        "These are facts the heart can feel; yet they call for careful study before they become clear to the intellect."
+      ],
+      "mod_sentences": [
+        "There is only one genuinely serious philosophical question, and that is suicide.",
+        "Deciding whether life is or is not worth living is the fundamental question of philosophy.",
+        "Everything else\u2014whether the physical universe has three dimensions, or whether human cognition operates through nine or twelve categories\u2014is secondary.",
+        "Those are intellectual pastimes; one must answer this first.",
+        "And if Nietzsche is correct that a philosopher only commands our respect if they teach by personal example, one can appreciate the gravity of the answer, for it directly precedes an irreversible act.",
+        "These are realities the heart senses instinctively, yet they demand rigorous examination before they become clear to the intellect."
+      ],
+      "move": "Camus establishes a strict hierarchy of urgency: metaphysical and epistemological theories are intellectual games; the question of survival and value precedes all contemplation."
+    },
+    {
+      "id": "c1-p2",
+      "orig_sentences": [
+        "If I ask myself how to judge that this question is more urgent than that, I reply that one judges by the actions it entails.",
+        "I have never seen anyone die for the ontological argument.",
+        "Galileo, who held a scientific truth of great importance, abjured it with the greatest ease as soon as it endangered his life.",
+        "In a certain sense, he did right.",
+        "That truth was not worth the stake.",
+        "Whether the earth or the sun revolves around the other is a matter of profound indifference.",
+        "To tell the truth, it is a futile question.",
+        "On the other hand, I see many people die because they judge that life is not worth living.",
+        "I see others paradoxically getting killed for the ideas or illusions that give them a reason for living (what is called a reason for living is also an excellent reason for dying).",
+        "I therefore conclude that the meaning of life is the most urgent of questions."
+      ],
+      "mod_sentences": [
+        "How does one determine whether one question is more urgent than another? By the actions it demands.",
+        "No one has ever died defending an abstract proof for the existence of God.",
+        "When Galileo discovered a scientific truth of immense importance, he renounced it without hesitation the moment his life was threatened\u2014and in a sense, he was right.",
+        "That truth was not worth burning at the stake for.",
+        "Whether the Earth orbits the Sun or the Sun orbits the Earth is a matter of profound indifference to our day-to-day existence; in truth, it is an idle question.",
+        "In contrast, I see men choose death because they conclude life is not worth living.",
+        "Paradoxically, I see others die for the very ideals or illusions that give them a reason to live (for what provides a reason for living also provides a compelling reason for dying).",
+        "I conclude, therefore, that the meaning of life is the most urgent question of all."
+      ],
+      "move": "Existential truth vs. theoretical truth. Galileo rightly refused martyrdom for astronomical physics because scientific facts do not alter the lived weight of existence, whereas meaning dictates literal life and death."
+    },
+    {
+      "id": "c1-p3",
+      "orig_sentences": [
+        "How to answer it?",
+        "On all essential problems (I mean thereby those that run the risk of leading to death or those that intensify the passion of living) there are probably but two methods of thought: the method of La Palisse and the method of Don Quixote.",
+        "Solely the balance between evidence and lyricism can allow us to achieve simultaneously emotion and lucidity.",
+        "In a subject at once so humble and so heavy with emotion, the learned and classical dialectic must yield, one can see, to a more modest attitude of mind deriving at one and the same time from common sense and understanding."
+      ],
+      "mod_sentences": [
+        "How are we to address it?",
+        "For essential questions\u2014those carrying the risk of death or the power to intensify the drive to live\u2014there are essentially two modes of thought: the plain statement of the undeniable (the method of La Palice) and the passionate embrace of conviction (the method of Don Quixote).",
+        "Only a balance between tangible evidence and poetic conviction allows us to attain both passion and clarity.",
+        "On a subject so elementary yet so emotionally charged, formal academic dialectics must give way to a more modest cast of mind\u2014one drawing simultaneously upon common sense and lucid psychological insight."
+      ],
+      "move": "Camus defines his methodology: balancing empirical fact (La Palice) with emotional passion (Don Quixote), discarding scholastic jargon in favor of clear psychological awareness."
+    },
+    {
+      "id": "c1-p4",
+      "orig_sentences": [
+        "Suicide has never been dealt with except as a social phenomenon.",
+        "On the contrary, we are concerned here, at the outset, with the relationship between individual thought and suicide.",
+        "An act like this is prepared within the silence of the heart, as is a great work of art.",
+        "The man himself is ignorant of it.",
+        "One evening he pulls the trigger or jumps.",
+        "Of an apartment-building manager who had killed himself I was told that he had lost his daughter five years before, that he had changed greatly since, and that that experience had \u201cundermined\u201d him.",
+        "A more exact word cannot be imagined.",
+        "Beginning to think is beginning to be undermined.",
+        "Society has but little connection with such beginnings.",
+        "The worm is in man\u2019s heart.",
+        "That is where it must be sought.",
+        "One must follow and understand this fatal game that leads from lucidity in the face of existence to flight from light."
+      ],
+      "mod_sentences": [
+        "Suicide has almost always been treated merely as a sociological statistic.",
+        "Here, by contrast, we are concerned from the start with the intimate connection between private consciousness and self-destruction.",
+        "Such an act matures in the silence of the heart, much like a great work of art.",
+        "The individual himself is often unaware of its silent gestation until, one evening, he pulls the trigger or leaps.",
+        "Of a building manager who took his own life, I was told he had lost his daughter five years earlier, had altered profoundly thereafter, and that the ordeal had 'undermined' him from within.",
+        "A more precise term cannot be conceived.",
+        "To begin to think is to begin to be undermined.",
+        "Society has little bearing on these internal origins.",
+        "The parasite resides within the human heart; that is where it must be sought.",
+        "We must trace this fatal progression from the first lucid confrontation with existence to the eventual flight from reality."
+      ],
+      "move": "Camus shifts suicide from social statistics to private internal decay. 'To begin to think is to begin to be undermined' marks the terrifying rupture when conscious reflection destroys habitual numbness."
+    },
+    {
+      "id": "c1-p5",
+      "orig_sentences": [
+        "In a sense, and as in melodrama, killing yourself amounts to confessing.",
+        "It is confessing that life is too much for you or that you do not understand it.",
+        "Let\u2019s not go too far in such analogies, however, but rather return to everyday words.",
+        "It is merely confessing that that \u201cis not worth the trouble.\u201d",
+        "Living, naturally, is never easy.",
+        "You continue making the gestures commanded by existence for many reasons, the first of which is habit.",
+        "Dying voluntarily implies that you have recognized, even instinctively, the ridiculous character of that habit, the absence of any profound reason for living, the insane character of that daily agitation, and the uselessness of suffering."
+      ],
+      "mod_sentences": [
+        "In a sense, and as in theatrical tragedy, taking one's own life amounts to a confession.",
+        "It is an admission that existence has overwhelmed you, or that you cannot make sense of it.",
+        "Yet setting aside dramatic metaphors, in the language of everyday life: it is simply confessing that life is not worth the trouble.",
+        "Living is never effortless.",
+        "One continues to perform the gestures demanded by existence for many reasons, foremost among them being habit.",
+        "Choosing to die voluntarily implies that one has recognized\u2014even if only by instinct\u2014the ridiculous nature of that habit, the total absence of any deeper reason for living, the frantic and pointless nature of our daily agitation, and the ultimate uselessness of our suffering."
+      ],
+      "move": "Defining suicide as the breaking of habit. We persist in life through mechanical momentum; voluntary death is the sudden realization that the momentum has no justification."
+    },
+    {
+      "id": "c1-p6",
+      "orig_sentences": [
+        "What, then, is that incalculable feeling that deprives the mind of the sleep necessary to life?",
+        "A world that can be explained even with bad reasons is a familiar world.",
+        "But, on the other hand, in a universe suddenly divested of illusions and lights, man feels an alien, a stranger.",
+        "His exile is without remedy since he is deprived of the memory of a lost home or the hope of a promised land.",
+        "This divorce between man and his life, the actor and his setting, is properly the feeling of absurdity.",
+        "All healthy men having thought of their own suicide, it can be seen, without further explanation, that there is a direct connection between this feeling and the longing for death."
+      ],
+      "mod_sentences": [
+        "What, then, is this elusive feeling that deprives the mind of the tranquil sleep necessary to sustain life?",
+        "A world that can be explained\u2014even through flawed reasoning\u2014remains a familiar world.",
+        "But in a cosmos suddenly stripped of comforting illusions and artificial certainties, man feels himself an alien, a stranger.",
+        "His exile is without remedy, for he possesses neither the memory of a lost Eden nor the promise of a future redemption.",
+        "This very divorce between man and his existence, between the actor and the stage, is precisely the feeling of absurdity.",
+        "Given that virtually every healthy person has contemplated suicide at some point, there is an immediate, demonstrable link between this feeling of absurdity and the longing for death."
+      ],
+      "move": "The foundational definition of the Absurd: the 'divorce'\u2014the painful rift between the human demand for purpose and a cosmos that offers no home, past paradise, or future salvation."
+    },
+    {
+      "id": "c1-p7",
+      "orig_sentences": [
+        "In a man\u2019s attachment to life there is something stronger than all the ills in the world.",
+        "The body\u2019s judgment is as good as the mind\u2019s, and the body shrinks from annihilation.",
+        "We get into the habit of living before acquiring the habit of thinking.",
+        "In that race which daily hastens us toward death, the body maintains its irreparable lead.",
+        "In short, the essence of that contradiction lies in what I shall call the act of eluding because it is both less and more than diversion in the Pascalian sense.",
+        "Eluding is the invariable game.",
+        "The typical act of eluding, the fatal evasion that constitutes the third theme of this essay, is hope.",
+        "Hope of another life one must \u201cdeserve\u201d or trickery of those who live not for life itself but for some great idea that will transcend it, refine it, give it a meaning, and betray it."
+      ],
+      "mod_sentences": [
+        "In a human being\u2019s attachment to life, there exists a force stronger than all the miseries of the world.",
+        "The body's judgment is fully equal to that of the intellect, and the body instinctively recoils from its own annihilation.",
+        "We form the habit of living long before we ever acquire the habit of thinking.",
+        "In that daily race carrying us toward death, the body retains an insurmountable lead over the mind.",
+        "The essence of this contradiction resides in what I term evasion.",
+        "The primary form of evasion\u2014the fatal trap that forms the third major theme of this essay\u2014is hope: whether the religious hope for an afterlife that must be earned, or the secular deception of living not for existence itself, but for some grand future ideology that claims to transcend and elevate life, yet ultimately betrays it."
+      ],
+      "move": "Exposing our dual survival buffers: (1) the biological body's ancient instinct to survive, and (2) the intellectual escape hatch of 'Hope' (postponing reality for heaven or a utopian future)."
+    },
+    {
+      "id": "c1-p8",
+      "orig_sentences": [
+        "One kills oneself because life is not worth living, that is certainly a truth\u2014yet an unfruitful one because it is a truism.",
+        "But does that insult to existence, that flat denial in which it is plunged come from the fact that it has no meaning?",
+        "Does its absurdity require one to escape it through hope or suicide\u2014this is what must be clarified, hunted down, and elucidated while brushing aside all the rest.",
+        "Does the Absurd dictate death?",
+        "This problem must be given priority over others, outside all methods of thought and all exercises of the disinterested mind."
+      ],
+      "mod_sentences": [
+        "That one takes one's life because existence is deemed not worth living is undeniable\u2014yet it remains an unhelpful truism.",
+        "The real inquiry is this: does this flat rejection of existence stem necessarily from the fact that life lacks transcendent meaning?",
+        "Does the absurdity of the human condition demand that we flee it\u2014either through the false promise of hope or the finality of suicide?",
+        "This is what must be pursued and clarified above all else: Does the Absurd dictate death?",
+        "This problem demands absolute priority over all theoretical exercises of detached intellect."
+      ],
+      "move": "The core inquiry of the book: Does meaninglessness logically demand self-annihilation? Or can reason find a way to inhabit the Absurd with defiance and integrity?"
+    }
+  ]
+}

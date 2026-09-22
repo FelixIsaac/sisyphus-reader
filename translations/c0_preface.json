@@ -1,0 +1,52 @@
+{
+  "section_id": "c0_preface",
+  "part": "Introduction",
+  "title": "Author's Preface & Epigraph",
+  "pairs": [
+    {
+      "id": "pref-p1",
+      "orig_sentences": [
+        "FOR ME \u201cThe Myth of Sisyphus\u201d marks the beginning of an idea which I was to pursue in The Rebel.",
+        "It attempts to resolve the problem of suicide, as The Rebel attempts to resolve that of murder, in both cases without the aid of eternal values which, temporarily perhaps, are absent or distorted in contemporary Europe.",
+        "The fundamental subject of \u201cThe Myth of Sisyphus\u201d is this: it is legitimate and necessary to wonder whether life has a meaning; therefore it is legitimate to meet the problem of suicide face to face.",
+        "The answer, underlying and appearing through the paradoxes which cover it, is this: even if one does not believe in God, suicide is not legitimate.",
+        "Written fifteen years ago, in 1940, amid the French and European disaster, this book declares that even within the limits of nihilism it is possible to find the means to proceed beyond nihilism.",
+        "In all the books I have written since, I have attempted to pursue this direction.",
+        "Although \u201cThe Myth of Sisyphus\u201d poses mortal problems, it sums itself up for me as a lucid invitation to live and to create, in the very midst of the desert."
+      ],
+      "mod_sentences": [
+        "For me, The Myth of Sisyphus marks the birth of a central intuition that I would later develop in The Rebel.",
+        "It seeks to resolve the question of suicide, just as The Rebel seeks to resolve the question of murder\u2014in both instances without relying on transcendent, eternal values, which for now are absent or broken in modern Europe.",
+        "The foundational premise of this book is straightforward: it is entirely legitimate and necessary to ask whether life possesses meaning; therefore, one must confront the reality of suicide directly.",
+        "The definitive conclusion, emerging through all the paradoxes that frame it, is this: even in the absence of God, suicide is not a valid answer.",
+        "Written fifteen years ago in 1940, during the catastrophe of the war in France and Europe, this work affirms that even within the depths of nihilism, one can discover the strength to transcend nihilism.",
+        "In all the books I have written since, I have attempted to pursue this direction.",
+        "Although this essay wrestles with deadly questions, for me it stands as an uncompromising invitation to live and to create\u2014directly in the heart of the wasteland."
+      ],
+      "move": "Camus summarizes his entire thesis before the book begins: This is an anti-nihilist work. Recognizing that life has no cosmic purpose does not justify self-destruction; it makes creative living even more urgent and heroic."
+    },
+    {
+      "id": "pref-p2",
+      "orig_sentences": [
+        "THE PAGES that follow deal with an absurd sensitivity that can be found widespread in the age\u2014and not with an absurd philosophy which our time, properly speaking, has not known.",
+        "It is therefore simply fair to point out, at the outset, what these pages owe to certain contemporary thinkers.",
+        "It is so far from my intention to hide this that they will be found cited and commented upon throughout this work.",
+        "But it is useful to note at the same time that the absurd, hitherto taken as a conclusion, is considered in this essay as a starting-point.",
+        "In this sense it may be said that there is something provisional in my commentary: one cannot prejudge the position it entails.",
+        "There will be found here merely the description, in the pure state, of an intellectual malady.",
+        "No metaphysic, no belief is involved in it for the moment.",
+        "These are the limits and the only bias of this book."
+      ],
+      "mod_sentences": [
+        "The pages that follow describe a widespread contemporary sensitivity to the absurd\u2014not an established 'absurd philosophy,' which our era has not actually developed.",
+        "It is only honest to acknowledge from the beginning how much this inquiry owes to contemporary philosophers; far from concealing these influences, they will be openly analyzed throughout this text.",
+        "Crucially, however, while previous thinkers treated the Absurd as a final dead-end conclusion, in this book the Absurd is treated purely as a starting point.",
+        "My analysis is therefore provisional: one should not assume the final verdict beforehand.",
+        "What you will find here is simply the unvarnished diagnosis of an intellectual condition.",
+        "No metaphysical system, no theology, and no dogma are assumed.",
+        "That is the exact scope and sole boundary of this book."
+      ],
+      "move": "The Pindar epigraph provides the moral motto of the book: reject dreams of immortality (heaven) and milk mortal life for maximum intensity. Camus also clarifies: Absurdity is not his conclusion\u2014it is merely his starting point."
+    }
+  ]
+}
