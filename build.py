@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import zipfile
 import shutil
@@ -2324,13 +2325,14 @@ aside[epub\\:type="footnote"], aside {
             zf.writestr(p, c.encode('utf-8'), compress_type=zipfile.ZIP_DEFLATED)
     print(f"Generated Full Modern Masterwork EPUB: {os.path.getsize(epub_path)} bytes")
 
-    # Sync to iCloud
-    dest_icloud = os.path.join(ICLOUD_DIR, "The Myth of Sisyphus - Modern Masterwork.epub")
-    if os.path.exists(dest_icloud):
-        if os.path.isdir(dest_icloud): shutil.rmtree(dest_icloud)
-        else: os.remove(dest_icloud)
-    shutil.copyfile(epub_path, dest_icloud)
-    print(f"Synced to Apple Books iCloud: {dest_icloud}")
+    # Sync to iCloud (opt-in only via --sync-icloud)
+    if "--sync-icloud" in sys.argv:
+        dest_icloud = os.path.join(ICLOUD_DIR, "The Myth of Sisyphus - Modern Masterwork.epub")
+        if os.path.exists(dest_icloud):
+            if os.path.isdir(dest_icloud): shutil.rmtree(dest_icloud)
+            else: os.remove(dest_icloud)
+        shutil.copyfile(epub_path, dest_icloud)
+        print(f"Synced to Apple Books iCloud: {dest_icloud}")
 
 def build_markdown_companion(sections):
     md_path = os.path.join(BASE_DIR, "myth_of_sisyphus_modern_translation.md")
@@ -2595,12 +2597,14 @@ h2.chapter-title {
             zf.writestr(p, c.encode('utf-8'), compress_type=zipfile.ZIP_DEFLATED)
     print(f"Generated Full Dual-Track EPUB: {os.path.getsize(epub_path)} bytes")
 
-    dest_icloud = os.path.join(ICLOUD_DIR, "The Myth of Sisyphus - Dual Track Edition.epub")
-    if os.path.exists(dest_icloud):
-        if os.path.isdir(dest_icloud): shutil.rmtree(dest_icloud)
-        else: os.remove(dest_icloud)
-    shutil.copyfile(epub_path, dest_icloud)
-    print(f"Synced to Apple Books iCloud: {dest_icloud}")
+    # Sync to iCloud (opt-in only via --sync-icloud)
+    if "--sync-icloud" in sys.argv:
+        dest_icloud = os.path.join(ICLOUD_DIR, "The Myth of Sisyphus - Dual Track Edition.epub")
+        if os.path.exists(dest_icloud):
+            if os.path.isdir(dest_icloud): shutil.rmtree(dest_icloud)
+            else: os.remove(dest_icloud)
+        shutil.copyfile(epub_path, dest_icloud)
+        print(f"Synced to Apple Books iCloud: {dest_icloud}")
 
 if __name__ == "__main__":
     secs = load_all_sections()
