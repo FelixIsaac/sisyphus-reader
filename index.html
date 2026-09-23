@@ -814,6 +814,15 @@
       color: #fff;
       border-color: var(--crimson);
     }
+    .btn-secondary {
+      background: var(--surface-hover);
+      border: 1px solid var(--border-highlight);
+      color: var(--text);
+    }
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
 
     /* Cloudflare Sync Modal & Toast */
     .modal-sync {
@@ -7352,8 +7361,11 @@
       <div class="chapter-progress-list" id="chapter-progress-rows"></div>
 
       <div class="modal-footer-actions">
-        <button class="btn btn-danger" onclick="resetAllReadingProgress()">Reset Progress</button>
-        <button class="btn btn-primary" onclick="toggleAccountabilityModal(false)">Back to Reading</button>
+        <button class="btn btn-secondary" id="btn-mark-upto" onclick="markAllUpToCurrent()">✓ Mark Read Up To Current Page</button>
+        <div style="display:flex; gap:0.5rem;">
+          <button class="btn btn-danger" onclick="resetAllReadingProgress()">Reset</button>
+          <button class="btn btn-primary" onclick="toggleAccountabilityModal(false)">Back to Reading</button>
+        </div>
       </div>
     </div>
   </div>
@@ -7476,7 +7488,19 @@
       document.getElementById('toc-drawer').classList.toggle('open', open);
     }
     function toggleAccountabilityModal(open) {
-      if (open) renderChapterBreakdown();
+      if (open) {
+        renderChapterBreakdown();
+        const btnMarkUpto = document.getElementById('btn-mark-upto');
+        if (btnMarkUpto) {
+          if (lastActiveCard) {
+            const pageNum = lastActiveCard.getAttribute('data-page') || '1';
+            const pIdx = lastActiveCard.getAttribute('data-p-idx') || '1';
+            btnMarkUpto.textContent = `✓ Mark Read Up To Page ${pageNum} (§${pIdx})`;
+          } else {
+            btnMarkUpto.textContent = `✓ Mark Read Up To Current Page`;
+          }
+        }
+      }
       document.getElementById('accountability-modal').classList.toggle('open', open);
     }
 
@@ -7492,7 +7516,7 @@
     }
 
     setInterval(() => {
-      if (timerRunning) {
+      if (timerRunning && !document.hidden) {
         sessionSeconds++;
         const mins = Math.floor(sessionSeconds / 60);
         const secs = sessionSeconds % 60;
@@ -7511,6 +7535,19 @@
     try {
       readCards = JSON.parse(localStorage.getItem('sisyphus-consumed-cards') || '{}');
     } catch(e) { readCards = {}; }
+
+    let unmarkedCards = {};
+    try {
+      unmarkedCards = JSON.parse(localStorage.getItem('sisyphus-unmarked-cards') || '{}');
+    } catch(e) { unmarkedCards = {}; }
+
+    let allCardsCached = null;
+    function getAllCards() {
+      if (!allCardsCached || allCardsCached.length === 0) {
+        allCardsCached = Array.from(document.querySelectorAll('.pair-card'));
+      }
+      return allCardsCached;
+    }
 
     function syncReadCardsUI() {
       const cardIds = Object.keys(readCards);
@@ -7552,26 +7589,62 @@
 
       if (readCards[pid]) {
         delete readCards[pid];
+        unmarkedCards[pid] = true;
         card.classList.remove('is-read');
         const btn = document.getElementById(`chk-${pid}`);
         if (btn) btn.innerHTML = '<span class="check-icon">○</span> <span class="check-txt">Mark Read</span>';
       } else {
         readCards[pid] = { words: words, time: Date.now() };
+        delete unmarkedCards[pid];
         card.classList.add('is-read');
         const btn = document.getElementById(`chk-${pid}`);
         if (btn) btn.innerHTML = '<span class="check-icon">✓</span> <span class="check-txt">Read</span>';
       }
 
       localStorage.setItem('sisyphus-consumed-cards', JSON.stringify(readCards));
+      localStorage.setItem('sisyphus-unmarked-cards', JSON.stringify(unmarkedCards));
       syncReadCardsUI();
       renderChapterBreakdown();
       scheduleCloudPush();
     }
 
+    function markAllUpToCurrent() {
+      const allCards = getAllCards();
+      if (!allCards.length) return;
+
+      let targetIdx = 0;
+      if (lastActiveCard) {
+        targetIdx = parseInt(lastActiveCard.getAttribute('data-global-idx') || '1');
+      } else {
+        targetIdx = 1;
+      }
+
+      for (let i = 0; i < targetIdx && i < allCards.length; i++) {
+        const c = allCards[i];
+        if (c) {
+          const cid = c.id;
+          const words = parseInt(c.getAttribute('data-words') || '150');
+          readCards[cid] = { words: words, time: Date.now() };
+          delete unmarkedCards[cid];
+        }
+      }
+
+      localStorage.setItem('sisyphus-consumed-cards', JSON.stringify(readCards));
+      localStorage.setItem('sisyphus-unmarked-cards', JSON.stringify(unmarkedCards));
+      syncReadCardsUI();
+      renderChapterBreakdown();
+      scheduleCloudPush(true);
+
+      const pageNum = lastActiveCard ? lastActiveCard.getAttribute('data-page') : '1';
+      showToast(`✓ Marked all ${targetIdx} paragraphs up to Page ${pageNum} as read!`);
+    }
+
     function resetAllReadingProgress() {
-      if (confirm('Are you sure you want to reset all paragraph reading progress?')) {
+      if (confirm('Are you sure you want to reset all paragraph reading progress? This will reset all read markers and return to the beginning.')) {
         readCards = {};
+        unmarkedCards = {};
         localStorage.removeItem('sisyphus-consumed-cards');
+        localStorage.removeItem('sisyphus-unmarked-cards');
         document.querySelectorAll('.pair-card').forEach(c => {
           c.classList.remove('is-read');
           const cid = c.id;
@@ -7580,7 +7653,9 @@
         });
         syncReadCardsUI();
         renderChapterBreakdown();
-        scheduleCloudPush(true);
+        scheduleCloudPush(true, true);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        showToast('🔄 Reading progress reset to beginning');
       }
     }
 
@@ -7703,6 +7778,27 @@
       if (currentCard && currentCard !== lastActiveCard) {
         lastActiveCard = currentCard;
         applyCardLocationToHUD(currentCard);
+      }
+
+      // Auto-track reading consumption as the reader progresses through paragraphs
+      if (scrollY > 80 && currentCard) {
+        const currentGlobalIdx = parseInt(currentCard.getAttribute('data-global-idx') || '1');
+        const allCards = getAllCards();
+        let hasNewRead = false;
+        for (let i = 0; i < currentGlobalIdx && i < allCards.length; i++) {
+          const c = allCards[i];
+          if (c && !readCards[c.id] && !unmarkedCards[c.id]) {
+            const words = parseInt(c.getAttribute('data-words') || '150');
+            readCards[c.id] = { words: words, time: Date.now(), auto: true };
+            hasNewRead = true;
+          }
+        }
+        if (hasNewRead) {
+          localStorage.setItem('sisyphus-consumed-cards', JSON.stringify(readCards));
+          syncReadCardsUI();
+          renderChapterBreakdown();
+          scheduleCloudPush();
+        }
       }
     }
 
@@ -7910,9 +8006,24 @@
         if (json.ok && json.data) {
           const remoteData = json.data;
           let newCardsCount = 0;
+          if (remoteData.unmarkedCards && typeof remoteData.unmarkedCards === 'object') {
+            for (const cid of Object.keys(remoteData.unmarkedCards)) {
+              unmarkedCards[cid] = true;
+              if (readCards[cid]) {
+                delete readCards[cid];
+                const card = document.getElementById(cid);
+                if (card) {
+                  card.classList.remove('is-read');
+                  const btn = document.getElementById(`chk-${cid}`);
+                  if (btn) btn.innerHTML = '<span class="check-icon">○</span> <span class="check-txt">Mark Read</span>';
+                }
+              }
+            }
+            localStorage.setItem('sisyphus-unmarked-cards', JSON.stringify(unmarkedCards));
+          }
           if (remoteData.readCards && typeof remoteData.readCards === 'object') {
             for (const [cid, val] of Object.entries(remoteData.readCards)) {
-              if (!readCards[cid]) {
+              if (!readCards[cid] && !unmarkedCards[cid]) {
                 readCards[cid] = val;
                 newCardsCount++;
               }
@@ -7944,17 +8055,17 @@
       }
     }
 
-    function scheduleCloudPush(immediate = false) {
+    function scheduleCloudPush(immediate = false, isReset = false) {
       if (pushTimeout) clearTimeout(pushTimeout);
       if (immediate) {
-        pushCloudSync();
+        pushCloudSync(isReset);
       } else {
         setSyncStatus('syncing', 'Saving...');
-        pushTimeout = setTimeout(pushCloudSync, 1200);
+        pushTimeout = setTimeout(() => pushCloudSync(false), 1200);
       }
     }
 
-    async function pushCloudSync() {
+    async function pushCloudSync(isReset = false) {
       if (!syncToken || isSyncing) return;
       isSyncing = true;
       setSyncStatus('syncing', 'Syncing...');
@@ -7963,9 +8074,11 @@
         const payload = {
           token: syncToken,
           data: {
-            readCards: readCards,
-            currentSecId: currentActivePid,
-            sessionSeconds: sessionSeconds,
+            reset: isReset,
+            readCards: isReset ? {} : readCards,
+            unmarkedCards: isReset ? {} : unmarkedCards,
+            currentSecId: isReset ? '' : currentActivePid,
+            sessionSeconds: isReset ? 0 : sessionSeconds,
             avgWpm: speedVal,
             updatedAt: Date.now()
           }

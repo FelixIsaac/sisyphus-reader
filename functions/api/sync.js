@@ -88,13 +88,18 @@ export async function onRequestPost(context) {
       };
     }
 
-    // Merge readCards (Union)
-    const mergedReadCards = { ...(existing.readCards || {}) };
-    if (incoming.readCards && typeof incoming.readCards === "object") {
+    // Merge readCards (Union, respecting resets and unmarks)
+    let mergedReadCards = incoming.reset ? {} : { ...(existing.readCards || {}) };
+    if (!incoming.reset && incoming.readCards && typeof incoming.readCards === "object") {
       for (const [k, v] of Object.entries(incoming.readCards)) {
         if (!mergedReadCards[k] || (v.time && v.time > (mergedReadCards[k].time || 0))) {
           mergedReadCards[k] = v;
         }
+      }
+    }
+    if (!incoming.reset && incoming.unmarkedCards && typeof incoming.unmarkedCards === "object") {
+      for (const k of Object.keys(incoming.unmarkedCards)) {
+        delete mergedReadCards[k];
       }
     }
 
@@ -105,8 +110,9 @@ export async function onRequestPost(context) {
 
     const merged = {
       readCards: mergedReadCards,
+      unmarkedCards: incoming.reset ? {} : { ...(existing.unmarkedCards || {}), ...(incoming.unmarkedCards || {}) },
       currentSecId: isNewer ? (incoming.currentSecId || existing.currentSecId || "") : existing.currentSecId,
-      sessionSeconds: Math.max(existing.sessionSeconds || 0, incoming.sessionSeconds || 0),
+      sessionSeconds: incoming.reset ? 0 : Math.max(existing.sessionSeconds || 0, incoming.sessionSeconds || 0),
       avgWpm: isNewer ? (incoming.avgWpm || existing.avgWpm || 240) : (existing.avgWpm || 240),
       updatedAt: Date.now(),
     };
