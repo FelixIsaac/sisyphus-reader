@@ -177,21 +177,33 @@
       z-index: 198;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
-      padding: 0.45rem 1.5rem;
+      padding: 0.35rem 1.4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-family: var(--font-sans);
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-muted);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
+      white-space: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .telemetry-bar::-webkit-scrollbar {
+      display: none;
     }
     .tele-stats {
       display: flex;
       align-items: center;
-      gap: 1.2rem;
-      flex-wrap: wrap;
+      gap: 0.8rem;
+      flex-shrink: 0;
+    }
+    .tele-divider {
+      color: var(--border-highlight);
+      font-size: 0.72rem;
+      user-select: none;
+      opacity: 0.5;
     }
     .tele-item {
       display: inline-flex;
@@ -235,10 +247,31 @@
       color: #61afef;
       border: 1px solid rgba(97, 175, 239, 0.3);
     }
-    .tele-actions {
+    .tele-right {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.45rem;
+      flex-shrink: 0;
+      margin-left: 0.8rem;
+    }
+    .tele-sync-btn {
+      background: var(--surface-orig);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.18rem 0.55rem;
+      border-radius: 5px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: var(--font-sans);
+      transition: all 0.15s ease;
+    }
+    .tele-sync-btn:hover {
+      background: var(--surface-hover);
+      color: var(--text);
+      border-color: var(--border-highlight);
     }
 
     /* Main Container */
@@ -1014,26 +1047,28 @@
       <span class="tele-item" id="tele-loc-item">
         📍 <span class="tele-page-badge" id="tele-page-badge">Page 1</span> <span class="tele-sub" id="tele-book-p">(p. 1 of 138)</span> • <span id="tele-loc"><strong>§1 of 2</strong></span> <span class="tele-loc-ch" id="tele-ch-title" style="color: var(--crimson); font-weight:600;">Introduction</span> <span class="tele-sub" id="tele-loc-pct">(50%)</span>
       </span>
+      <span class="tele-divider">|</span>
       <span class="tele-item">
         📚 Read: <strong id="tele-consumed-count">0</strong> / 182 <span class="tele-sub" id="tele-consumed-pct">(0%)</span>
       </span>
+      <span class="tele-divider">|</span>
       <span class="tele-item">
-        ⏱ Session: <strong id="timer-val">00:00</strong>
+        ⏱ <strong id="timer-val">00:00</strong>
         <button class="tele-timer-btn" id="timer-toggle-btn" onclick="toggleTimer()" title="Pause / Resume">⏸</button>
       </span>
+      <span class="tele-divider">|</span>
       <span class="tele-item">
-        ⚡ Speed: <strong id="tele-speed">240</strong> wpm
+        ⚡ <strong id="tele-speed">240</strong> wpm
       </span>
+      <span class="tele-divider">|</span>
       <span class="tele-item tele-pace-item">
-        🎯 Pacing: <span class="pace-chip on-track" id="pace-chip">16m / ch</span>
-      </span>
-      <span class="tele-item" id="tele-sync-item" onclick="toggleSyncModal(true)" style="cursor:pointer;" title="Cloudflare Cross-Device Sync">
-        ☁️ <span id="tele-sync-dot">🟢</span> <span id="tele-sync-text">Synced</span>
+        <span class="pace-chip on-track" id="pace-chip">🎯 16m/ch</span>
       </span>
     </div>
-    <div class="tele-actions">
-      <button class="btn btn-sm" onclick="toggleSyncModal(true)" title="Cloudflare Device Sync">☁️ Sync Device</button>
-      <button class="btn btn-sm" onclick="toggleAccountabilityModal(true)" title="Open Reading Accountability Dashboard">📊 Stats</button>
+    <div class="tele-right">
+      <button class="tele-sync-btn" id="tele-sync-item" onclick="toggleSyncModal(true)" title="Cloudflare Cross-Device Sync">
+        ☁️ <span id="tele-sync-dot">🟢</span> <span id="tele-sync-text">Synced</span>
+      </button>
     </div>
   </div>
 
@@ -7624,25 +7659,44 @@
         progressBar.style.width = pct + '%';
       }
 
-      // Focal reading line (~140px below the sticky header)
-      const triggerY = 140;
-      const cards = document.querySelectorAll('.pair-card');
-      let currentCard = null;
+      // Step 1: Find Active Book Section (based on reading focal line)
+      const sections = document.querySelectorAll('.book-section');
+      if (!sections.length) return;
 
-      for (let i = 0; i < cards.length; i++) {
-        const rect = cards[i].getBoundingClientRect();
-        if (rect.top <= triggerY && rect.bottom > triggerY) {
-          currentCard = cards[i];
-          break;
+      const focalLine = Math.max(160, window.innerHeight * 0.45);
+      const topBarThreshold = 95;
+
+      let activeSection = null;
+      for (let i = 0; i < sections.length; i++) {
+        const sec = sections[i];
+        const sRect = sec.getBoundingClientRect();
+        // Section has reached focal line and hasn't completely scrolled away
+        if (sRect.top <= focalLine && sRect.bottom > topBarThreshold) {
+          activeSection = sec;
         }
       }
 
-      // Fallback: If above the first card or scrolled to the very end
-      if (!currentCard && cards.length > 0) {
-        if (cards[0].getBoundingClientRect().top > triggerY) {
-          currentCard = cards[0];
+      if (!activeSection) {
+        if (sections[0].getBoundingClientRect().top > focalLine) {
+          activeSection = sections[0];
         } else {
-          currentCard = cards[cards.length - 1];
+          activeSection = sections[sections.length - 1];
+        }
+      }
+
+      // Step 2: Inside active section, find active card
+      const cards = activeSection.querySelectorAll('.pair-card');
+      let currentCard = null;
+
+      if (cards.length > 0) {
+        currentCard = cards[0];
+        for (let j = 0; j < cards.length; j++) {
+          const cRect = cards[j].getBoundingClientRect();
+          if (cRect.top <= focalLine) {
+            currentCard = cards[j];
+          } else {
+            break;
+          }
         }
       }
 
