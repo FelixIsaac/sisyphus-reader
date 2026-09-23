@@ -30,22 +30,225 @@ SECTION_ORDER = [
 ]
 
 # Canonical Print Pagination (Vintage International Standard Edition)
+# Exact Ground-Truth PDF Pagination (Vintage International Standard Edition PDF)
 CHAPTER_PAGE_STARTS = {
-    "c0_preface": 1,
-    "c1_absurdity_and_suicide": 3,
-    "c2_absurd_walls": 10,
+    "c0_preface": 4,
+    "c1_absurdity_and_suicide": 10,
+    "c2_absurd_walls": 15,
     "c3_philosophical_suicide": 28,
-    "c4_absurd_freedom": 51,
-    "c5_don_juanism": 65,
-    "c6_drama": 77,
-    "c7_conquest": 85,
-    "c8_philosophy_and_fiction": 93,
-    "c9_kirilov": 102,
-    "c10_ephemeral_creation": 113,
-    "c11_myth_of_sisyphus": 119,
-    "c12_kafka_appendix": 124
+    "c4_absurd_freedom": 44,
+    "c5_don_juanism": 58,
+    "c6_drama": 64,
+    "c7_conquest": 69,
+    "c8_philosophy_and_fiction": 76,
+    "c9_kirilov": 83,
+    "c10_ephemeral_creation": 90,
+    "c11_myth_of_sisyphus": 95,
+    "c12_kafka_appendix": 99
 }
-TOTAL_BOOK_PAGES = 138
+
+CHAPTER_PAGE_RANGES = {
+    "c0_preface": "pp. 4–9",
+    "c1_absurdity_and_suicide": "pp. 10–14",
+    "c2_absurd_walls": "pp. 15–28",
+    "c3_philosophical_suicide": "pp. 28–43",
+    "c4_absurd_freedom": "pp. 44–54",
+    "c5_don_juanism": "pp. 58–63",
+    "c6_drama": "pp. 64–69",
+    "c7_conquest": "pp. 69–75",
+    "c8_philosophy_and_fiction": "pp. 76–82",
+    "c9_kirilov": "pp. 83–89",
+    "c10_ephemeral_creation": "pp. 90–93",
+    "c11_myth_of_sisyphus": "pp. 95–98",
+    "c12_kafka_appendix": "pp. 99–109"
+}
+
+TOTAL_BOOK_PAGES = 170
+
+PARAGRAPH_EXACT_PAGES = {
+    "pref-p1": 4,
+    "pref-p2": 9,
+    "c1-p1": 10,
+    "c1-p2": 10,
+    "c1-p3": 10,
+    "c1-p4": 11,
+    "c1-p5": 11,
+    "c1-p6": 12,
+    "c1-p7": 13,
+    "c1-p8": 14,
+    "c2-p1": 17,
+    "c2-p2": 17,
+    "c2-p3": 18,
+    "c2-p4": 23,
+    "c2-p5": 28,
+    "c3-p1": 28,
+    "c3-p2": 28,
+    "c3-p3": 29,
+    "c3-p4": 29,
+    "c3-p5": 30,
+    "c3-p6": 30,
+    "c3-p7": 30,
+    "c3-p8": 31,
+    "c3-p9": 31,
+    "c3-p10": 32,
+    "c3-p11": 33,
+    "c3-p12": 33,
+    "c3-p13": 34,
+    "c3-p14": 35,
+    "c3-p15": 36,
+    "c3-p16": 37,
+    "c3-p17": 37,
+    "c3-p18": 37,
+    "c3-p19": 38,
+    "c3-p20": 38,
+    "c3-p21": 39,
+    "c3-p22": 40,
+    "c3-p23": 40,
+    "c3-p24": 41,
+    "c3-p25": 41,
+    "c3-p26": 42,
+    "c3-p27": 42,
+    "c3-p28": 43,
+    "c4-p1": 44,
+    "c4-p2": 44,
+    "c4-p3": 45,
+    "c4-p4": 46,
+    "c4-p5": 46,
+    "c4-p6": 47,
+    "c4-p7": 47,
+    "c4-p8": 48,
+    "c4-p9": 48,
+    "c4-p10": 49,
+    "c4-p11": 49,
+    "c4-p12": 50,
+    "c4-p13": 51,
+    "c4-p14": 51,
+    "c4-p15": 51,
+    "c4-p16": 52,
+    "c4-p17": 52,
+    "c4-p18": 53,
+    "c4-p19": 54,
+    "c5-p1": 58,
+    "c5-p2": 58,
+    "c5-p3": 58,
+    "c5-p4": 59,
+    "c5-p5": 59,
+    "c5-p6": 60,
+    "c5-p7": 61,
+    "c5-p8": 61,
+    "c5-p9": 62,
+    "c5-p10": 62,
+    "c5-p11": 63,
+    "c5-p12": 63,
+    "c6-p1": 64,
+    "c6-p2": 64,
+    "c6-p3": 65,
+    "c6-p4": 65,
+    "c6-p5": 65,
+    "c6-p6": 66,
+    "c6-p7": 67,
+    "c6-p8": 68,
+    "c6-p9": 68,
+    "c6-p10": 68,
+    "c6-p11": 68,
+    "c6-p12": 69,
+    "c7-p1": 69,
+    "c7-p2": 69,
+    "c7-p3": 69,
+    "c7-p4": 70,
+    "c7-p5": 70,
+    "c7-p6": 71,
+    "c7-p7": 72,
+    "c7-p8": 72,
+    "c7-p9": 73,
+    "c7-p10": 73,
+    "c7-p11": 73,
+    "c7-p12": 74,
+    "c7-p13": 74,
+    "c7-p14": 75,
+    "c8-p1": 76,
+    "c8-p2": 76,
+    "c8-p3": 76,
+    "c8-p4": 77,
+    "c8-p5": 77,
+    "c8-p6": 77,
+    "c8-p7": 78,
+    "c8-p8": 78,
+    "c8-p9": 79,
+    "c8-p10": 79,
+    "c8-p11": 80,
+    "c8-p12": 80,
+    "c8-p13": 80,
+    "c8-p14": 81,
+    "c8-p15": 81,
+    "c8-p16": 82,
+    "c8-p17": 82,
+    "c9-p1": 82,
+    "c9-p2": 83,
+    "c9-p3": 83,
+    "c9-p4": 84,
+    "c9-p5": 84,
+    "c9-p6": 84,
+    "c9-p7": 84,
+    "c9-p8": 85,
+    "c9-p9": 86,
+    "c9-p10": 86,
+    "c9-p11": 87,
+    "c9-p12": 88,
+    "c9-p13": 88,
+    "c9-p14": 89,
+    "c10-p1": 90,
+    "c10-p2": 90,
+    "c10-p3": 90,
+    "c10-p4": 91,
+    "c10-p5": 91,
+    "c10-p6": 92,
+    "c10-p7": 92,
+    "c10-p8": 92,
+    "c10-p9": 93,
+    "c10-p10": 93,
+    "c10-p11": 93,
+    "c11-p1": 95,
+    "c11-p2": 95,
+    "c11-p3": 95,
+    "c11-p4": 96,
+    "c11-p5": 96,
+    "c11-p6": 96,
+    "c11-p7": 97,
+    "c11-p8": 97,
+    "c11-p9": 97,
+    "c11-p10": 98,
+    "c12-p1": 99,
+    "c12-p2": 99,
+    "c12-p3": 100,
+    "c12-p4": 100,
+    "c12-p5": 101,
+    "c12-p6": 101,
+    "c12-p7": 101,
+    "c12-p8": 102,
+    "c12-p9": 102,
+    "c12-p10": 103,
+    "c12-p11": 103,
+    "c12-p12": 104,
+    "c12-p13": 104,
+    "c12-p14": 105,
+    "c12-p15": 105,
+    "c12-p16": 106,
+    "c12-p17": 106,
+    "c12-p18": 106,
+    "c12-p19": 106,
+    "c12-p20": 107,
+    "c12-p21": 107,
+    "c12-p22": 108,
+    "c12-p23": 108,
+    "c12-p24": 109,
+    "c12-p25": 109,
+    "c12-p26": 109,
+    "c12-p27": 109,
+    "c12-p28": 109,
+    "c12-p29": 109,
+    "c12-p30": 109,
+}
 
 def load_all_sections():
     sections = []
@@ -87,18 +290,15 @@ def build_web_app(sections):
         sec_words = sum(len(" ".join(p.get("mod_sentences", [])).split()) for p in pairs)
         est_sec_mins = max(1, round(sec_words / 240))
 
-        start_p = CHAPTER_PAGE_STARTS.get(sec_id, 1)
-        next_p = CHAPTER_PAGE_STARTS.get(sec_keys[s_i + 1], 138) if s_i + 1 < len(sec_keys) else 138
-        pages_span = max(1, next_p - start_p)
-        end_p = max(start_p, next_p - 1 if pages_span > 1 else start_p)
-        page_range_str = f"pp. {start_p}–{end_p}" if end_p > start_p else f"p. {start_p}"
+        start_p = CHAPTER_PAGE_STARTS.get(sec_id, 4)
+        page_range_str = CHAPTER_PAGE_RANGES.get(sec_id, f"p. {start_p}")
         
         sections_html += f"""
         <section class="book-section" id="{sec_id}" data-sec-id="{sec_id}" data-sec-title="{html.escape(title)}" data-sec-paras="{total_sec_paras}" data-sec-pages="{page_range_str}">
           <div class="section-badge">{part}</div>
           <h2 class="section-title">{title}</h2>
           <div class="section-meta-row">
-            <span class="sec-meta-pill">📖 <strong>{page_range_str}</strong> (Vintage)</span>
+            <span class="sec-meta-pill">📖 <strong>{page_range_str}</strong> (Vintage Original PDF)</span>
             <span class="sec-meta-pill"><strong>{total_sec_paras}</strong> Paragraphs</span>
             <span class="sec-meta-pill"><strong>{sec_words:,}</strong> Words</span>
             <span class="sec-meta-pill">Est. <strong>~{est_sec_mins} min</strong></span>
@@ -106,7 +306,6 @@ def build_web_app(sections):
           </div>
           <div class="pairs-wrapper">
         """
-        cum_sec_words = 0
         for p_idx, pair in enumerate(pairs, 1):
             global_idx += 1
             pid = pair.get("id", f"{sec_id}-p{p_idx}")
@@ -119,10 +318,8 @@ def build_web_app(sections):
             pct_ch = round((p_idx / total_sec_paras) * 100)
             pct_book = round((global_idx / total_book_blocks) * 100)
 
-            # Assign canonical book page based on word flow
-            para_page = start_p + int((cum_sec_words / max(1, sec_words)) * pages_span)
-            para_page = min(end_p, max(start_p, para_page))
-            cum_sec_words += para_words
+            # Assign exact PDF page from ground-truth original text
+            para_page = PARAGRAPH_EXACT_PAGES.get(pid, start_p)
             
             sections_html += f"""
             <div class="pair-card" id="{pid}" data-pair="{pid}" data-words="{para_words}" data-sec-id="{sec_id}" data-page="{para_page}" data-p-idx="{p_idx}" data-p-total="{total_sec_paras}" data-global-idx="{global_idx}" data-global-total="{total_book_blocks}">
@@ -1216,7 +1413,7 @@ def build_web_app(sections):
   <div class="telemetry-bar">
     <div class="tele-stats">
       <span class="tele-item" id="tele-loc-item">
-        📍 <span class="tele-page-badge" id="tele-page-badge">Page 1</span> <span class="tele-sub" id="tele-book-p">(p. 1 of 138)</span> • <span id="tele-loc"><strong>§1 of 2</strong></span> <span class="tele-loc-ch" id="tele-ch-title" style="color: var(--crimson); font-weight:600;">Introduction</span> <span class="tele-sub" id="tele-loc-pct">(50%)</span>
+        📍 <span class="tele-page-badge" id="tele-page-badge">Page 4</span> <span class="tele-sub" id="tele-book-p">(p. 4 of 170)</span> • <span id="tele-loc"><strong>§1 of 2</strong></span> <span class="tele-loc-ch" id="tele-ch-title" style="color: var(--crimson); font-weight:600;">Introduction</span> <span class="tele-sub" id="tele-loc-pct">(50%)</span>
       </span>
       <span class="tele-divider">|</span>
       <span class="tele-item">
@@ -1657,7 +1854,7 @@ def build_web_app(sections):
     }}
 
     // Real-Time Scroll Spy & Dynamic Location HUD Engine
-    const TOTAL_BOOK_PAGES = 138;
+    const TOTAL_BOOK_PAGES = 170;
     const progressBar = document.getElementById('reading-progress-bar');
     let lastActiveCard = null;
     let scrollRafId = null;
@@ -2221,14 +2418,8 @@ aside[epub\\:type="footnote"], aside {
         pairs = sec.get("pairs", [])
         xhtml_name = f"{sec_id}.xhtml"
 
-        start_p = CHAPTER_PAGE_STARTS.get(sec_id, 1)
-        next_p = 138
-        if idx - 2 + 1 < len(sections):
-            next_sec_id = sections[idx - 2 + 1].get("section_id")
-            next_p = CHAPTER_PAGE_STARTS.get(next_sec_id, 138)
-        pages_span = max(1, next_p - start_p)
-        end_p = max(start_p, next_p - 1 if pages_span > 1 else start_p)
-        sec_words = sum(len(" ".join(p.get("mod_sentences", [])).split()) for p in pairs) or 1
+        start_p = CHAPTER_PAGE_STARTS.get(sec_id, 4)
+        page_range_str = CHAPTER_PAGE_RANGES.get(sec_id, f"p. {start_p}")
 
         ch_html = f"""<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html>
@@ -2236,22 +2427,20 @@ aside[epub\\:type="footnote"], aside {
 <head><title>{title}</title><link rel="stylesheet" type="text/css" href="style.css"/></head>
 <body>
   <div class="chapter-header">
-    <div class="chapter-sub">{part} • pp. {start_p}–{end_p}</div>
+    <div class="chapter-sub">{part} • {page_range_str}</div>
     <h2 class="chapter-title">{title}</h2>
   </div>
 """
         asides = ""
-        cum_sec_words = 0
         for p_idx, pair in enumerate(pairs, 1):
             pid = f"{sec_id}-fn{p_idx}"
+            pair_id = pair.get("id")
             mod_text = pair.get("mod_text") or " ".join(pair.get("mod_sentences", []))
             orig_text = pair.get("orig_text") or " ".join(pair.get("orig_sentences", []))
             move = pair.get("move", "")
             para_words = len(mod_text.split())
 
-            para_page = start_p + int((cum_sec_words / sec_words) * pages_span)
-            para_page = min(end_p, max(start_p, para_page))
-            cum_sec_words += para_words
+            para_page = PARAGRAPH_EXACT_PAGES.get(pair_id, start_p)
 
             # Sanitize for XML
             mod_text = html.escape(mod_text, quote=False)
@@ -2351,15 +2540,20 @@ def build_markdown_companion(sections):
     for sec in sections:
         part = sec.get("part", "")
         title = sec.get("title", "")
+        sec_id = sec.get("section_id", "")
+        start_p = CHAPTER_PAGE_STARTS.get(sec_id, 4)
+        page_range_str = CHAPTER_PAGE_RANGES.get(sec_id, f"p. {start_p}")
         pairs = sec.get("pairs", [])
-        lines.append(f"## {title}")
+        lines.append(f"## {title} ({page_range_str})")
         lines.append(f"*{part}*\n")
         for p_idx, pair in enumerate(pairs, 1):
+            pair_id = pair.get("id")
+            para_page = PARAGRAPH_EXACT_PAGES.get(pair_id, start_p)
             orig_text = pair.get("orig_text") or " ".join(pair.get("orig_sentences", []))
             mod_text = pair.get("mod_text") or " ".join(pair.get("mod_sentences", []))
             move = pair.get("move", "")
-            lines.append(f"### §{p_idx}")
-            lines.append(f"> **Original 1955 Translation:**  \n> {orig_text}\n")
+            lines.append(f"### §{p_idx} • Original PDF Page {para_page}")
+            lines.append(f"> **Original 1955 Translation (Page {para_page}):**  \n> {orig_text}\n")
             lines.append(f"**Dignified Modern Translation:**  \n{mod_text}\n")
             lines.append(f"> [!TIP]\n> **The Philosophical Move:** {move}\n")
             lines.append("---\n")
@@ -2503,14 +2697,8 @@ h2.chapter-title {
         pairs = sec.get("pairs", [])
         xhtml_name = f"{sec_id}.xhtml"
 
-        start_p = CHAPTER_PAGE_STARTS.get(sec_id, 1)
-        next_p = 138
-        if idx - 2 + 1 < len(sections):
-            next_sec_id = sections[idx - 2 + 1].get("section_id")
-            next_p = CHAPTER_PAGE_STARTS.get(next_sec_id, 138)
-        pages_span = max(1, next_p - start_p)
-        end_p = max(start_p, next_p - 1 if pages_span > 1 else start_p)
-        sec_words = sum(len(" ".join(p.get("mod_sentences", [])).split()) for p in pairs) or 1
+        start_p = CHAPTER_PAGE_STARTS.get(sec_id, 4)
+        page_range_str = CHAPTER_PAGE_RANGES.get(sec_id, f"p. {start_p}")
 
         ch_html = f"""<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html>
@@ -2518,20 +2706,18 @@ h2.chapter-title {
 <head><title>{html.escape(title)}</title><link rel="stylesheet" type="text/css" href="style.css"/></head>
 <body>
   <div class="chapter-header">
-    <div class="chapter-sub">{html.escape(part)} • pp. {start_p}–{end_p}</div>
+    <div class="chapter-sub">{html.escape(part)} • {page_range_str}</div>
     <h2 class="chapter-title">{html.escape(title)}</h2>
   </div>
 """
-        cum_sec_words = 0
         for p_idx, pair in enumerate(pairs, 1):
+            pair_id = pair.get("id")
             orig_text = html.escape(pair.get("orig_text") or " ".join(pair.get("orig_sentences", [])), quote=False)
             mod_text = html.escape(pair.get("mod_text") or " ".join(pair.get("mod_sentences", [])), quote=False)
             move = html.escape(pair.get("move", ""), quote=False)
             para_words = len(mod_text.split())
 
-            para_page = start_p + int((cum_sec_words / sec_words) * pages_span)
-            para_page = min(end_p, max(start_p, para_page))
-            cum_sec_words += para_words
+            para_page = PARAGRAPH_EXACT_PAGES.get(pair_id, start_p)
 
             ch_html += f"""
   <div class="pair-block">
